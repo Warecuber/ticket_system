@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>logout</title>
+  </head>
+  <body>
+    <h1>logging out...</h1>
+  </body>
+  <script src="scripts/config.js"></script>
+  <script>
+    $.ajax({
+      async: true,
+      method: "POST",
+      url: endpoint_config.auth.logout,
+      contentType: "json",
+      headers: {
+        "Content-Type": "application/json",
+        authtoken: localStorage.getItem("authtoken"),
+      },
+      success: (data) => {
+        localStorage.clear();
+        window.location.pathname = endpoint_config.front_end_pages.login;
+      },
+      error: (err) => {
+        window.location.pathname = endpoint_config.front_end_pages.login;
+        console.log(err);
+      },
+    });
+  </script>
+</html>

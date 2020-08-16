@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>logged in</h1>
+  </body>
+  <script src="scripts/config.js"></script>
+  <script>
+    $.ajax({
+      async: true,
+      method: "GET",
+      url: endpoint_config.tickets.view,
+      contentType: "json",
+      headers: {
+        "Content-Type": "application/json",
+        authtoken: localStorage.getItem("authtoken"),
+      },
+      success: (data) => {
+        console.log("success");
+        // console.log(data);
+      },
+      error: (err) => {
+        if (err.status === 403) {
+          console.log("Not agent");
+        } else if (err.status === 401 || err.status === 400) {
+          window.location.pathname = endpoint_config.front_end_pages.login;
+        } else {
+          console.log(err);
+        }
+      },
+    });
+  </script>
+</html>

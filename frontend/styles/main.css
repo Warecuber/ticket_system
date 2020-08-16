@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo&display=swap");
+:root {
+  --color-background: #0e0b1a;
+  --color-red: #7a0000;
+  --color-green: #007a0c;
+  --color-brown: #44280e;
+  --color-purple: #2e2845;
+  --color-gray: #6d7d70;
+  --color-blue: #093548;
+  --color-font-gray: #bec6bf;
+  --color-light-purple: #7776bc;
+}
+
+html,
+body {
+  color: var(--color-font-gray);
+  font-weight: 300;
+  font-family: Heebo;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: rgb(14, 11, 26);
+  background: linear-gradient(
+    142deg,
+    rgba(14, 11, 26, 1) 0%,
+    rgba(46, 40, 69, 1) 100%
+  );
+}
+html {
+  height: 100vh;
+}
+.login {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin: 64px auto;
+  padding: 24px;
+  border-radius: 4px;
+  background-color: var(--color-gray);
+  box-shadow: 4px 4px 10px black;
+}
+.loginInfo {
+  color: var(--color-background);
+  margin: 0;
+  font-size: 24px;
+}
+
+.login input {
+  padding: 8px;
+  background-color: var(--color-font-gray);
+  border: 2px solid var(--color-brown);
+  border-radius: 5px;
+  margin: 4px;
+}
+.login input:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.login button {
+  margin: 8px;
+  background-color: var(--color-background);
+  color: var(--color-font-gray);
+  padding: 4px 16px;
+  border-radius: 4px;
+  border: 2px solid var(--color-background);
+  font-family: Heebo;
+  transition: 0.1s all ease-in-out;
+}
+.login button:hover {
+  cursor: pointer;
+  color: var(--color-background);
+  background-color: var(--color-gray);
+}
+.login button:focus {
+  outline: none;
+  color: var(--color-background);
+  background-color: var(--color-gray);
+  box-shadow: rgba(8, 47, 155, 0.6) 0px 0px 0px 4px;
+}

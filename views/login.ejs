@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="login">
+      <input type="email" name="email" id="email" />
+      <input type="password" name="password" id="password" />
+      <button class="loginButton">Login</button>
+    </div>
+  </body>
+  <script>
+    if (localStorage.getItem("authtoken")) {
+      $.ajax({
+        async: true,
+        method: "POST",
+        url: "http://localhost:3000/api/user/validate",
+        contentType: "json",
+        headers: {
+          "Content-Type": "application/json",
+          authtoken: localStorage.getItem("authtoken"),
+        },
+        success: (data) => {
+          window.location.pathname = "/home";
+        },
+        error: (err) => {
+          console.log("invalid token");
+        },
+      });
+    }
+    $(".loginButton").on("click", () => {
+      $.ajax({
+        async: true,
+        method: "POST",
+        url: "http://localhost:3000/api/user/login",
+        contentType: "json",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          email: document.querySelector("#email").value,
+          password: document.querySelector("#password").value,
+        }),
+        success: (data) => {
+          console.log("authenticated");
+          localStorage.setItem("authtoken", `Bearer ${data.token}`);
+          localStorage.setItem("refresh_token", data.refresh_token);
+          window.location.pathname = "/login";
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    });
+  </script>
+</html>
