@@ -9,6 +9,7 @@
   --color-blue: #093548;
   --color-font-gray: #bec6bf;
   --color-light-purple: #7776bc;
+  --color-data-red: #FFADAD;
 }
 
 html,
@@ -47,6 +48,9 @@ html {
 .loginInfo {
   color: var(--color-background);
   margin: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 8px;
   font-size: 24px;
 }
 
@@ -82,4 +86,27 @@ html {
   color: var(--color-background);
   background-color: var(--color-gray);
   box-shadow: rgba(8, 47, 155, 0.6) 0px 0px 0px 4px;
+}
+
+.inputLabel {
+  color: var(--color-background);
+}
+.input-custom-field ~ label {
+  position: relative;
+}
+.input-custom-field ~ label::before {
+  content: attr(data-label);
+  position: absolute;
+  color: var(--color-background);
+  top: -32px;
+  height: 100%;
+  left: 104px;
+  width: auto;
+  transition: 0.1s all ease-in-out;
+}
+
+.loginError {
+  color: var(--color-red);
+  font-size: 16px;
+  margin: 8px 0;
 }
