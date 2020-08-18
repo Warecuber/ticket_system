@@ -1,3 +1,6 @@
+// IIFE to store variable for endpoint config
+// returns the object to allow calling a reference to the endpoint instead of the name (just in case it changes)
+
 let endpoint_config = (() => {
   let origin = window.location.origin;
   let base_config = {
@@ -24,6 +27,9 @@ let endpoint_config = (() => {
 
   return endpoints;
 })();
+
+// IIFE to store the code for API calls
+// returns an object with referenes to each function
 
 let ajax_config = (() => {
   let headers = {
