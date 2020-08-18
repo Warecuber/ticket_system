@@ -12,28 +12,32 @@
       success: (data) => {
         window.location.pathname = endpoint_config.front_end_pages.home;
       },
-      error: (err) => {
+      error: async (err) => {
         if (err.status === 401) {
-          console.log("401");
+          // if not authorized, try to refresh the token
           try {
-            $.ajax({
-              async: true,
-              method: "POST",
-              url: endpoint_config.auth.refresh,
-              contentType: "json",
-              headers: {
-                "Content-Type": "application/json",
-                refresh_token: localStorage.getItem("refresh_token"),
-              },
-              success: (data) => {
-                console.log(data);
-                localStorage.setItem("authtoken", data.accessToken);
-                window.location.pathname = endpoint_config.front_end_pages.home;
-              },
-              error: (err) => {
-                console.log("error");
-              },
+            let apicall = await ajax_config.post(endpoint_config.auth.refresh, {
+              refresh_token: localStorage.getItem("refresh_token"),
             });
+            console.log(apicall);
+            // $.ajax({
+            //   async: true,
+            //   method: "POST",
+            //   url: endpoint_config.auth.refresh,
+            //   contentType: "json",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //     refresh_token: localStorage.getItem("refresh_token"),
+            //   },
+            //   success: (data) => {
+            //     console.log(data);
+            //     localStorage.setItem("authtoken", data.accessToken);
+            //     window.location.pathname = endpoint_config.front_end_pages.home;
+            //   },
+            //   error: (err) => {
+            //     console.log("error");
+            //   },
+            // });
           } catch (err) {
             console.log("err");
           }
@@ -51,32 +55,43 @@
     // console.log(e);
   });
 
-  function checkPasswd() {
-    if (checkRequired() > 0) {
+  ////////////////////
+  // Code to debug //
+  //////////////////
+
+  async function checkPasswd() {
+    if (checkRequired() > 0) { // run checkRequired(). If it returns at least 1 field missing a value, show an error
       $(".loginError").html("Missing required fields");
-    } else {
-      $.ajax({
-        async: true,
-        method: "POST",
-        url: endpoint_config.auth.login,
-        contentType: "json",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({
-          email: document.querySelector("#email").value,
-          password: document.querySelector("#password").value,
-        }),
-        success: (data) => {
-          console.log("authenticated");
-          localStorage.setItem("authtoken", `Bearer ${data.token}`);
-          localStorage.setItem("refresh_token", data.refresh_token);
-          window.location.pathname = endpoint_config.front_end_pages.home;
-        },
-        error: (err) => {
-          $(".loginError").html(err.responseText);
-        },
+    } else { // else, make an API call and store the result in a variable names apiCall
+      let apiCall = await ajax_config.post(endpoint_config.auth.login, {
+        email: document.querySelector("#email").value,
+        password: document.querySelector("#password").value,
       });
+      // try to log the value of apiCall to see if it works
+      await console.log(apiCall);
+
+      // $.ajax({
+      //   async: true,
+      //   method: "POST",
+      //   url: endpoint_config.auth.login,
+      //   contentType: "json",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   data: JSON.stringify({
+      //     email: document.querySelector("#email").value,
+      //     password: document.querySelector("#password").value,
+      //   }),
+      //   success: (data) => {
+      //     console.log("authenticated");
+      //     localStorage.setItem("authtoken", `Bearer ${data.token}`);
+      //     localStorage.setItem("refresh_token", data.refresh_token);
+      //     window.location.pathname = endpoint_config.front_end_pages.home;
+      //   },
+      //   error: (err) => {
+      //     $(".loginError").html(err.responseText);
+      //   },
+      // });
     }
   }
   function checkRequired() {

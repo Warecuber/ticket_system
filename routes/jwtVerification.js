@@ -20,11 +20,15 @@ let auth = (req, res, next) => {
 };
 
 let refreshAuth = (req, res, next) => {
-  const refresh_token = req.header("refresh_token");
+  // const refresh_token = req.header("refresh_token");
+  const refresh_token = req.body.refresh_token;
   if (!refresh_token) return res.status(401).send("Not authenticated");
 
   try {
-    const verified = jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET);
+    const verified = jwt.verify(
+      refresh_token,
+      process.env.REFRESH_TOKEN_SECRET
+    );
     req.refresh_token = refresh_token;
     req.user = verified;
     next();
