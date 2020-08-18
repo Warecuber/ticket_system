@@ -127,3 +127,24 @@ let ajax_config = (() => {
     },
   };
 })();
+
+async function postRequest(url, formData) {
+  let returnedData;
+
+  try {
+    returnedData = await $.ajax({
+      async: true,
+      method: "POST",
+      url: url,
+      contentType: "json",
+      headers: {
+        "Content-Type": "application/json",
+        authtoken: localStorage.getItem("authtoken"),
+      },
+      data: JSON.stringify(formData),
+    });
+    return returnedData;
+  } catch (err) {
+    console.error(err);
+  }
+}

@@ -60,15 +60,37 @@
   //////////////////
 
   async function checkPasswd() {
-    if (checkRequired() > 0) { // run checkRequired(). If it returns at least 1 field missing a value, show an error
+    if (checkRequired() > 0) {
+      // run checkRequired(). If it returns at least 1 field missing a value, show an error
       $(".loginError").html("Missing required fields");
-    } else { // else, make an API call and store the result in a variable names apiCall
+    } else {
+      // else, make an API call and store the result in a variable names apiCall
+
+      //////////////////////////////////////////////////////////////
+      //  I prefer to do something like this, if I can.          //
+      //  I find it easier to follow the code when it's objects //
+      ///////////////////////////////////////////////////////////
+
       let apiCall = await ajax_config.post(endpoint_config.auth.login, {
         email: document.querySelector("#email").value,
         password: document.querySelector("#password").value,
       });
+
+      ///////////////////////////////////////////
+      // I found this works if I do it this   //
+      // way, but then the code in config.js //
+      // ins't contained in an IIFE         //
+      ///////////////////////////////////////
+
+      postRequest(endpoint_config.auth.login, {
+        email: document.querySelector("#email").value,
+        password: document.querySelector("#password").value,
+      }).then((res) => {
+        console.log(res);
+      });
+
       // try to log the value of apiCall to see if it works
-      await console.log(apiCall);
+      // await console.log(apiCall);
 
       // $.ajax({
       //   async: true,
