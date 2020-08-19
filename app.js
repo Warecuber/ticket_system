@@ -18,6 +18,9 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => {
 app.use(express.static("frontend"));
 
 app.use(express.json());
+app.use("/login", express.static("frontend/login.html"));
+app.use("/home", express.static("frontend/home.html"));
+app.use("/logout", express.static("frontend/logout.html"));
 // app.set("view engine", "ejs");
 
 // endpoints
