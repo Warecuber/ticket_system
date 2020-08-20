@@ -16,10 +16,11 @@
         if (err.status === 401) {
           // if not authorized, try to refresh the token
           try {
-            let apicall = await ajax_config.post(endpoint_config.auth.refresh, {
+            postRequest(endpoint_config.auth.refresh, {
               refresh_token: localStorage.getItem("refresh_token"),
+            }).then((res) => {
+              console.log(res);
             });
-            console.log(apicall);
             // $.ajax({
             //   async: true,
             //   method: "POST",
@@ -52,41 +53,21 @@
     if (e.key === "Enter") {
       checkPasswd();
     }
-    // console.log(e);
   });
-
-  ////////////////////
-  // Code to debug //
-  //////////////////
 
   async function checkPasswd() {
     if (checkRequired() > 0) {
-      // run checkRequired(). If it returns at least 1 field missing a value, show an error
       $(".loginError").html("Missing required fields");
     } else {
-      // else, make an API call and store the result in a variable names apiCall
-
-      //////////////////////////////////////////////////////////////
-      //  I prefer to do something like this, if I can.          //
-      //  I find it easier to follow the code when it's objects //
-      ///////////////////////////////////////////////////////////
-
-      let apiCall = await ajax_config.post(endpoint_config.auth.login, {
-        email: document.querySelector("#email").value,
-        password: document.querySelector("#password").value,
-      });
-
-      ///////////////////////////////////////////
-      // I found this works if I do it this   //
-      // way, but then the code in config.js //
-      // ins't contained in an IIFE         //
-      ///////////////////////////////////////
-
       postRequest(endpoint_config.auth.login, {
         email: document.querySelector("#email").value,
         password: document.querySelector("#password").value,
       }).then((res) => {
-        console.log(res);
+        if (res.token) {
+          localStorage.setItem("authtoken", `Bearer ${res.token}`);
+          localStorage.setItem("refresh_token", res.refresh_token);
+          window.location.pathname = endpoint_config.front_end_pages.home;
+        }
       });
 
       // try to log the value of apiCall to see if it works
