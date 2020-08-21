@@ -79,7 +79,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/validate", auth, (req, res) => {
-  res.send("valid token");
+  res.send({ status: 200, message: "Valid token" });
   // console.log("authenticated");
 });
 
@@ -111,7 +111,11 @@ router.post("/refresh", refreshAuth, async (req, res) => {
     // if it is valid, make a variable with the user information from the refresh token
     const accessToken = generateAccessToken({ name: user.name });
     // return the new access token
-    res.json({ accessToken: accessToken });
+    res.json({
+      status: 200,
+      message: "token refreshed",
+      accessToken: accessToken,
+    });
   });
 });
 

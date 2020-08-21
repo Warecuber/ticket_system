@@ -53,6 +53,7 @@ async function getRequest(url) {
 
 async function postRequest(url, formData) {
   let returnedData;
+  let errorData;
 
   try {
     returnedData = await $.ajax({
@@ -65,12 +66,14 @@ async function postRequest(url, formData) {
     });
     return returnedData;
   } catch (err) {
-    console.error(err);
+    let errorData = err;
+    return { status: err.status, error: err.responseText };
   }
 }
 
 async function deleteRequest(url, formData) {
   let returnedData;
+  let errorData;
 
   try {
     returnedData = await $.ajax({
@@ -83,7 +86,8 @@ async function deleteRequest(url, formData) {
     });
     return returnedData;
   } catch (err) {
-    console.error(err);
+    let errorData = err;
+    return { status: 401, error: errorData };
   }
 }
 
@@ -101,6 +105,28 @@ async function patchRequest(url, formData) {
     });
     return returnedData;
   } catch (err) {
-    console.error(err);
+    return err;
+  }
+}
+
+async function refreshToken() {
+  console.log("refreshing");
+  let returnedData;
+
+  try {
+    returnedData = await $.ajax({
+      async: true,
+      method: "POST",
+      url: endpoint_config.auth.refresh,
+      contentType: "json",
+      headers: {
+        "Content-Type": "application/json",
+        refresh_token: localStorage.getItem("refresh_token"),
+      },
+    });
+    return returnedData;
+  } catch (err) {
+    console.log(err);
+    return err;
   }
 }

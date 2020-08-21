@@ -21,7 +21,7 @@ let auth = (req, res, next) => {
 
 let refreshAuth = (req, res, next) => {
   // const refresh_token = req.header("refresh_token");
-  const refresh_token = req.body.refresh_token;
+  const refresh_token = req.header("refresh_token");
   if (!refresh_token) return res.status(401).send("Not authenticated");
 
   try {

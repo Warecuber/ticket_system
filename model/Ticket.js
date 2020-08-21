@@ -64,6 +64,11 @@ const ticketSchema = new mongoose.Schema({
     default: [],
     required: false,
   },
+  comments: {
+    type: Array,
+    default: [],
+    required: false,
+  },
   date: {
     type: Date,
     default: Date.now,
@@ -71,8 +76,8 @@ const ticketSchema = new mongoose.Schema({
   priority: {
     type: String,
     default: "Low",
-    required: false
-  }
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("Ticket", ticketSchema);
