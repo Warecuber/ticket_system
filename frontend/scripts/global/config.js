@@ -47,13 +47,12 @@ async function getRequest(url) {
     });
     return returnedData;
   } catch (err) {
-    console.error(err);
+    return { status: err.status, error: err.responseText };
   }
 }
 
 async function postRequest(url, formData) {
   let returnedData;
-  let errorData;
 
   try {
     returnedData = await $.ajax({
@@ -66,14 +65,12 @@ async function postRequest(url, formData) {
     });
     return returnedData;
   } catch (err) {
-    let errorData = err;
     return { status: err.status, error: err.responseText };
   }
 }
 
 async function deleteRequest(url, formData) {
   let returnedData;
-  let errorData;
 
   try {
     returnedData = await $.ajax({
@@ -86,8 +83,7 @@ async function deleteRequest(url, formData) {
     });
     return returnedData;
   } catch (err) {
-    let errorData = err;
-    return { status: 401, error: errorData };
+    return { status: err.status, error: err.responseText };
   }
 }
 
@@ -105,7 +101,7 @@ async function patchRequest(url, formData) {
     });
     return returnedData;
   } catch (err) {
-    return err;
+    return { status: err.status, error: err.responseText };
   }
 }
 
@@ -124,9 +120,9 @@ async function refreshToken() {
         refresh_token: localStorage.getItem("refresh_token"),
       },
     });
+    localStorage.setItem("authtoken", returnedData.accessToken);
     return returnedData;
   } catch (err) {
-    console.log(err);
-    return err;
+    return { status: err.status, error: err.responseText };
   }
 }

@@ -9,7 +9,6 @@ router.get("/get", auth, async (req, res) => {
   if (!userPermissions.scopes.includes("agent"))
     return res.status(403).send("Unauthorized");
   const openTickets = await Ticket.find({ status: "Open" });
-  console.log();
   res.send(openTickets);
 });
 

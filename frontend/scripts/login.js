@@ -5,7 +5,6 @@
       refreshToken().then((res) => {
         if (res.status === 200) {
           console.log(res);
-          localStorage.setItem("authtoken", res.accessToken);
           window.location.href = endpoint_config.front_end_pages.home;
         }
       });
@@ -39,7 +38,7 @@
       });
     }
   }
-  
+
   function checkRequired() {
     let missingFields = 0;
     let listOfInputs = document.querySelectorAll("input[data-required='true']");

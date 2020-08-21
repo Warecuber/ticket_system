@@ -10,29 +10,5 @@
     <h1>logged in</h1>
   </body>
   <script src="scripts/global/config.js"></script>
-  <script>
-    $.ajax({
-      async: true,
-      method: "GET",
-      url: endpoint_config.tickets.view,
-      contentType: "json",
-      headers: {
-        "Content-Type": "application/json",
-        authtoken: localStorage.getItem("authtoken"),
-      },
-      success: (data) => {
-        console.log("success");
-        // console.log(data);
-      },
-      error: (err) => {
-        if (err.status === 403) {
-          console.log("Not agent");
-        } else if (err.status === 401 || err.status === 400) {
-          window.location.pathname = endpoint_config.front_end_pages.login;
-        } else {
-          console.log(err);
-        }
-      },
-    });
-  </script>
+  <script src="scripts/home.js"></script>
 </html>
