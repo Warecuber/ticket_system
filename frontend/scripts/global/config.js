@@ -16,8 +16,10 @@ let endpoint_config = (() => {
     },
     tickets: {
       view: `${base_config.tickets}/get`,
+      view_by_status: `${base_config.tickets}/get/query`,
       create: `${base_config.tickets}/new`,
     },
+    user: {},
     front_end_pages: {
       login: "/login.html",
       logout: "/logout.html",
@@ -36,13 +38,27 @@ let headers = {
 };
 async function getRequest(url) {
   let returnedData;
-
   try {
     returnedData = await $.ajax({
       async: true,
       method: "GET",
       url: url,
-      contentType: "json",
+      headers: headers,
+    });
+    return returnedData;
+  } catch (err) {
+    return { status: err.status, error: err.responseText };
+  }
+}
+
+async function queryRequest(url, query) {
+  let returnedData;
+  console.log(`${url}?${query.name}=${query.param}`);
+  try {
+    returnedData = await $.ajax({
+      async: true,
+      method: "GET",
+      url: `${url}?${query.name}=${query.param}`,
       headers: headers,
     });
     return returnedData;

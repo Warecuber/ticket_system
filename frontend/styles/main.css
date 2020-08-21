@@ -9,7 +9,7 @@
   --color-blue: #093548;
   --color-font-gray: #bec6bf;
   --color-light-purple: #7776bc;
-  --color-data-red: #FFADAD;
+  --color-data-red: #ffadad;
 }
 
 html,
@@ -109,4 +109,24 @@ html {
   color: var(--color-red);
   font-size: 16px;
   margin: 8px 0;
+}
+.contents {
+  display: flex;
+  flex-direction: column;
+}
+.ticketStatus .open{
+  color: var(--color-green)
+}
+#ticketTable td, #ticketTable{
+  border-spacing: 0;
+  padding: 0;
+}
+#ticketTable td {
+  padding: 4px 8px;
+  /* border: 1px solid var(--color-gray); */
+}
+
+.TicketRow:hover {
+  cursor: pointer;
+  background-color: var(--color-blue);
 }

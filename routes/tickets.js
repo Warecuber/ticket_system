@@ -12,6 +12,14 @@ router.get("/get", auth, async (req, res) => {
   res.send(openTickets);
 });
 
+router.get("/get/query", auth, async (req, res) => {
+  const userPermissions = await User.findOne({ id: req.user.id });
+  if (!userPermissions.scopes.includes("agent"))
+    return res.status(403).send("Unauthorized");
+  const openTickets = await Ticket.find({ status: req.query.status });
+  res.send(openTickets);
+});
+
 router.post("/new", auth, async (req, res) => {
   const userPermissions = await User.findOne({ id: req.user.id });
   if (!userPermissions.scopes.includes("create"))

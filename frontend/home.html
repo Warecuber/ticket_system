@@ -4,10 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles/main.css" />
     <title>Home</title>
   </head>
   <body>
-    <h1>logged in</h1>
+    <div class="body">
+      <div class="view">
+        <select name="viewType" id="viewType">
+          <option value="Open">Open</option>
+          <option value="Open">In Progress</option>
+          <option value="Open">Awaiting Response</option>
+          <option value="Open">Code Changes</option>
+          <option value="Open">Closed</option>
+        </select>
+      </div>
+      <div class="contents">
+        <table id="ticketTable">
+          <tr class="ticketTitleRow">
+            <td>Status</td>
+            <td>Priority</td>
+            <td>Title</td>
+            <td>Reporter</td>
+            <td>Agent</td>
+          </tr>
+          <!-- <tr class="TicketRow" data-ticket="1">
+            <td class="ticketStatus open">Open</td>
+            <td>Low</td>
+            <td>Unable to open Outlook</td>
+            <td>John Test</td>
+            <td>John Ware</td>
+          </tr>
+          <tr class="TicketRow" data-ticket="1">
+            <td class="ticketStatus open">Open</td>
+            <td>Low</td>
+            <td>Unable to open Outlook</td>
+            <td>John Test</td>
+            <td>John Ware</td>
+          </tr> -->
+        </table>
+      </div>
+    </div>
+    <!-- <h1>logged in</h1> -->
   </body>
   <script src="scripts/global/config.js"></script>
   <script src="scripts/home.js"></script>
