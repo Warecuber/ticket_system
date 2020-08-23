@@ -25,6 +25,7 @@ router.post("/register", async (req, res) => {
   const user = new User({
     name: req.body.name,
     email: req.body.email,
+    username: req.body.username,
     password: hashedPassword,
   });
   try {
@@ -43,6 +44,7 @@ router.post("/login", async (req, res) => {
 
   //check to see if the email exists
   const user = await User.findOne({ email: req.body.email });
+  console.log(user)
   if (!user) return res.status(400).send("Email or password incorrect");
   // check if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -52,12 +54,14 @@ router.post("/login", async (req, res) => {
   const token = generateAccessToken({
     _id: user._id,
     email: user.email,
+    username: user.username,
     name: user.name,
     scopes: user.scopes,
   });
   const refresh_token = generateRefreshToken({
     _id: user._id,
     email: user.email,
+    username: user.username,
     name: user.name,
     scopes: user.scopes,
   });

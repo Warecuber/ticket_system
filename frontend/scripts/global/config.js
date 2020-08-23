@@ -1,11 +1,14 @@
 // IIFE to store variable for endpoint config
 // returns the object to allow calling a reference to the endpoint instead of the name (just in case it changes)
 
+// const { base } = require("../../../model/User");
+
 let endpoint_config = (() => {
   let origin = window.location.origin;
   let base_config = {
     auth: `${origin}/user/auth`,
     tickets: `${origin}/tickets`,
+    user: `${origin}/user`,
   };
   endpoints = {
     auth: {
@@ -19,7 +22,9 @@ let endpoint_config = (() => {
       view_by_status: `${base_config.tickets}/get/query`,
       create: `${base_config.tickets}/new`,
     },
-    user: {},
+    user: {
+      current: `${base_config.user}/current`,
+    },
     front_end_pages: {
       login: "/login",
       logout: "/logout",

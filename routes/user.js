@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { auth } = require("./jwtVerification");
 const User = require("../model/User");
-const bcrypt = require('bcryptjs')
+const bcrypt = require("bcryptjs");
 const { ticketValidation } = require("../validation");
 
 router.post("/update/scopes", auth, async (req, res) => {
@@ -31,6 +31,15 @@ router.post("/update/password", auth, async (req, res) => {
       res.status(300).send(updated);
     }
   );
+});
+
+router.get("/current", auth, async (req, res) => {
+  let currentUser = {
+    name: req.user.name,
+    email: req.user.email,
+    username: req.user.username,
+  };
+  res.send(currentUser);
 });
 
 module.exports = router;

@@ -4,15 +4,25 @@
     queryParam: "Open",
   }).then((res) => {
     if (res.error === "Invalid token") {
-      refreshToken().then(() => {
-        if (res.status === 401) {
-          window.location.path === endpoint_config.front_end_pages.login;
+      refreshToken().then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          window.location.pathname = endpoint_config.front_end_pages.login;
         } else if (res.status === 200) {
           location.reload();
         }
       });
+    } else {
+      getRequest(endpoint_config.user.current).then((res) => {
+        if (res.name) {
+          $(".loggedInAs").html(res.name);
+        }
+      });
+      updateUI(res);
     }
-    updateUI(res);
+  });
+
+  $(".loggedInAs").on("click", function () {
+    window.location.pathname = endpoint_config.front_end_pages.logout;
   });
 
   function updateUI(tickets) {
