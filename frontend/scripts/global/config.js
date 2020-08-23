@@ -21,6 +21,7 @@ let endpoint_config = (() => {
       view: `${base_config.tickets}/get`,
       view_by_status: `${base_config.tickets}/get/query`,
       create: `${base_config.tickets}/new`,
+      update: `${base_config.tickets}/update`,
     },
     user: {
       current: `${base_config.user}/current`,
@@ -139,7 +140,7 @@ async function refreshToken() {
         refresh_token: localStorage.getItem("refresh_token"),
       },
     });
-    localStorage.setItem("authtoken", returnedData.accessToken);
+    localStorage.setItem("authtoken", `Bearer ${returnedData.accessToken}`);
     return returnedData;
   } catch (err) {
     if (err.status === 401) {
@@ -168,3 +169,58 @@ function formatDateTime(date) {
   let newTime = `${hour}:${timeSplit[1]}:${timeSplit[2]} ${AMPM} `;
   return `${newDate} - ${newTime}`;
 }
+
+function Banner(message, type) {
+  this.message = message;
+  this.type = type;
+  this.create();
+}
+
+Banner.prototype.create = function () {
+  let mainContainer = document.querySelector(".body");
+  let newContainer = document.createElement("div");
+  newContainer.classList.add("banner");
+  newContainer.classList.add(this.type);
+  newContainer.innerHTML = `${this.message}`;
+  mainContainer.insertAdjacentElement("beforeend", newContainer);
+  this.slideDown();
+  let that = this;
+  setTimeout(() => {
+    that.slideUp();
+    setTimeout(() => {
+      document.querySelector('.banner').remove();
+    }, 100)
+  }, 3000)
+};
+
+Banner.prototype.slideDown = function () {
+  let currentPos = -32;
+  let animateInterval = setInterval(animate, 1);
+
+  function animate() {
+    if (currentPos === 1) {
+      clearInterval(animateInterval);
+    } else {
+      $(".banner").css({
+        top: `${currentPos}%`,
+      });
+      currentPos++;
+    }
+  }
+};
+
+Banner.prototype.slideUp = function () {
+  let currentPos = 0;
+  let animateInterval = setInterval(animate, 1);
+
+  function animate() {
+    if (currentPos === -32) {
+      clearInterval(animateInterval);
+    } else {
+      $(".banner").css({
+        top: `${currentPos}%`,
+      });
+      currentPos--;
+    }
+  }
+};

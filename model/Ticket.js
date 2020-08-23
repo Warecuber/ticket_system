@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const ticketSchema = new mongoose.Schema({
+  ticket_number: {
+    type: Number,
+    required: true,
+  },
   reporter: {
     type: String,
     required: true,

@@ -142,6 +142,8 @@ html {
 
 .TicketRow:hover {
   cursor: pointer;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   background-color: var(--color-blue);
 }
 .ticketDetails {
@@ -294,15 +296,23 @@ html {
   background-color: var(--color-gray-3);
 }
 
-.settingSelect {
-  width: 100%;
+.settingSelect,
+.selectQuery {
   background-color: var(--color-gray-2);
   padding: 4px 8px;
-  border-radius: 4px;
   outline: none;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 2px solid var(--color-gray-4);
 }
+.selectQuery {
+  border-radius: 8px;
+}
+
+.settingSelect {
+  border-radius: 4px;
+  width: 100%;
+}
+
 .settingSelect:active {
   border-color: var(--color-blue);
 }
@@ -333,6 +343,33 @@ html {
 .headerItem:focus {
   outline: none;
   box-shadow: var(--color-button-focus);
+}
+.ticketSettingsButtons {
+  padding: 8px 0;
+}
+
+.banner {
+  height: 32px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: -32px;
+  padding: 0 16px;
+  text-overflow: ellipsis;
+}
+
+.testBanner {
+  background-color: var(--color-blue);
+}
+
+.successBanner {
+  background-color: var(--color-green);
+}
+
+.errorBanner {
+  background-color: var(--color-red);
 }
 
 /* ////////////// */
