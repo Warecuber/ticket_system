@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="styles/main.css" />
+    <script
+      src="https://kit.fontawesome.com/331e82cb9d.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Home</title>
   </head>
   <body>
@@ -27,24 +31,52 @@
             <td>Reporter</td>
             <td>Agent</td>
           </tr>
-          <!-- <tr class="TicketRow" data-ticket="1">
-            <td class="ticketStatus open">Open</td>
-            <td>Low</td>
-            <td>Unable to open Outlook</td>
-            <td>John Test</td>
-            <td>John Ware</td>
-          </tr>
-          <tr class="TicketRow" data-ticket="1">
-            <td class="ticketStatus open">Open</td>
-            <td>Low</td>
-            <td>Unable to open Outlook</td>
-            <td>John Test</td>
-            <td>John Ware</td>
-          </tr> -->
         </table>
       </div>
     </div>
-    <!-- <h1>logged in</h1> -->
+    <div class="ticketDetails">
+      <div class="overlayNav">
+        <p class="overlayTitle">Teams Crashed</p>
+        <div class="closeButton">
+          <i class="far fa-times-circle closeButton"></i>
+        </div>
+      </div>
+      <div class="overlayDetails">
+        <div class="branding">John's Ticket System</div>
+      </div>
+      <div class="overlayBody">
+        <div class="threadContainer">
+          <div class="thread reporter">
+            <div class="replyHeader">
+              <span class="replyName">John Ware</span>
+              <span class="replyDate">8/21/20 1:26PM</span>
+            </div>
+            <div class="replyContents">
+              Teams crashed and doesn't want to open.
+            </div>
+          </div>
+          <div class="thread agent">
+            <div class="replyHeader">
+              <span class="replyName">John Ware</span>
+              <span class="replyDate">8/21/20 5:23PM</span>
+            </div>
+            <div class="replyContents">
+              Hi John, can you try restarting your computer?
+            </div>
+          </div>
+        </div>
+        <div class="replyContainer">
+          <textarea
+            name="replyContent"
+            id="replyContent"
+            class="replyTextarea"
+          ></textarea>
+          <div class="replyButtonContainer">
+            <button class='overlaySendButtonLower'>Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="scripts/global/config.js"></script>
   <script src="scripts/home.js"></script>

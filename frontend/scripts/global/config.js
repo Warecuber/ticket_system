@@ -21,9 +21,9 @@ let endpoint_config = (() => {
     },
     user: {},
     front_end_pages: {
-      login: "/login.html",
-      logout: "/logout.html",
-      home: "/home.html",
+      login: "/login",
+      logout: "/logout",
+      home: "/home",
     },
   };
 
@@ -53,7 +53,6 @@ async function getRequest(url) {
 
 async function queryRequest(url, query) {
   let returnedData;
-  console.log(`${url}?${query.name}=${query.param}`);
   try {
     returnedData = await $.ajax({
       async: true,
@@ -122,7 +121,6 @@ async function patchRequest(url, formData) {
 }
 
 async function refreshToken() {
-  console.log("refreshing");
   let returnedData;
 
   try {
@@ -139,6 +137,10 @@ async function refreshToken() {
     localStorage.setItem("authtoken", returnedData.accessToken);
     return returnedData;
   } catch (err) {
+    if (err.status === 401) {
+      localStorage.removeItem("authtoken");
+      window.location.pathname = endpoint_config.front_end_pages.login;
+    }
     return { status: err.status, error: err.responseText };
   }
 }

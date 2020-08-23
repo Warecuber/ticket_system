@@ -5,11 +5,17 @@
   --color-green: #007a0c;
   --color-brown: #44280e;
   --color-purple: #2e2845;
-  --color-gray: #6d7d70;
+  --color-gray-1: #6d7d70;
+  --color-gray-2: #687868;
+  --color-gray-3: #4c574e;
+  --color-gray-4: #262c27;
+  --color-gray-5: #131613;
+  --color-white: #ffffff;
   --color-blue: #093548;
   --color-font-gray: #bec6bf;
   --color-light-purple: #7776bc;
   --color-data-red: #ffadad;
+  --color-button-focus: rgba(8, 47, 155, 0.6) 0px 0px 0px 4px;
 }
 
 html,
@@ -85,7 +91,7 @@ html {
   outline: none;
   color: var(--color-background);
   background-color: var(--color-gray);
-  box-shadow: rgba(8, 47, 155, 0.6) 0px 0px 0px 4px;
+  box-shadow: var(--color-button-focus);
 }
 
 .inputLabel {
@@ -114,10 +120,11 @@ html {
   display: flex;
   flex-direction: column;
 }
-.ticketStatus .open{
-  color: var(--color-green)
+.ticketStatus .open {
+  color: var(--color-green);
 }
-#ticketTable td, #ticketTable{
+#ticketTable td,
+#ticketTable {
   border-spacing: 0;
   padding: 0;
 }
@@ -129,4 +136,133 @@ html {
 .TicketRow:hover {
   cursor: pointer;
   background-color: var(--color-blue);
+}
+.ticketDetails {
+  display: block;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  width: 100%;
+  background-color: var(--color-blue);
+}
+.overlayNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--color-gray-3);
+}
+.closeButton {
+  font-size: 24px;
+}
+.closeButton:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.overlayTitle {
+  color: var(--color-white);
+  display: inline-block;
+  font-size: 24px;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+.overlayBody {
+  height: calc(100% - 60px);
+  margin-left: 200px;
+}
+.replyTextarea {
+  display: inline-block;
+  resize: vertical;
+  width: 100%;
+  border-radius: 5px;
+  background-color: var(--color-gray-3);
+  border: 2px solid var(--color-gray-4);
+  color: var(--color-white);
+  box-sizing: border-box;
+  min-height: 64px;
+  padding: 4px;
+  outline: none;
+}
+.replyTextarea:focus {
+  border-color: var(--color-gray-5)
+}
+.threadContainer {
+  overflow-y: scroll;
+  overflow: auto;
+  margin: 4px;
+  height: calc(100% - 128px);
+}
+.overlayThread {
+  display: block;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 4px 8px;
+  margin-left: 200px;
+  width: 100%;
+}
+.overlayDetails {
+  position: absolute;
+  z-index: 4;
+  width: 200px;
+  height: calc(100% - 67px);
+  background-color: var(--color-gray-4);
+  box-shadow: 2px 2px 6px var(--color-gray-5);
+}
+.thread {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  margin: 4px 0;
+  padding: 8px;
+}
+.thread.reporter {
+  background-color: var(--color-green);
+}
+.thread.agent {
+  background-color: var(--color-red);
+}
+.replyHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.replyName {
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 18px;
+}
+.replyContainer {
+  background-color: var(--color-gray-4);
+  z-index: 5;
+  left: 200px;
+  bottom: 0;
+  padding: 4px;
+}
+.replyContents {
+  color: var(--color-white);
+}
+.replyButtonContainer {
+  margin: 4px;
+}
+.overlaySendButtonLower {
+  padding: 4px 8px;
+  color: var(--color-white);
+  border: 2px solid var(--color-gray-4);
+  background-color: var(--color-green);
+  border-radius: 5px;
+  transition: 0.1s all ease-in-out;
+}
+.overlaySendButtonLower:hover {
+  cursor: pointer;
+  background-color: var(--color-gray-3);
+}
+.overlaySendButtonLower:focus {
+  outline: none;
+  box-shadow: var(--color-button-focus);
+}
+
+@media only screen and (min-width: 700px) {
+  .overlayBody {
+    padding: 0 15%;
+  }
 }
