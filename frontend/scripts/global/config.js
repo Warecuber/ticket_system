@@ -57,7 +57,7 @@ async function queryRequest(url, query) {
     returnedData = await $.ajax({
       async: true,
       method: "GET",
-      url: `${url}?${query.name}=${query.param}`,
+      url: `${url}?queryName=${query.queryName}&${query.queryName}=${query.queryParam}`,
       headers: headers,
     });
     return returnedData;
@@ -143,4 +143,23 @@ async function refreshToken() {
     }
     return { status: err.status, error: err.responseText };
   }
+}
+
+function formatDateTime(date) {
+  let dataSplit = date.split("T");
+  let dateRaw = dataSplit[0];
+  let timeRaw = dataSplit[1].replace("Z", "");
+
+  // date
+  let dateSplit = dateRaw.split("-");
+  let newDate = `${dateSplit[1]}/${dateSplit[2]}/${dateSplit[0]}`;
+
+  //time
+  let timeRemoveDecimal = timeRaw.split(".");
+  let timeSplit = timeRemoveDecimal[0].split(":");
+
+  let hour = timeSplit[0] % 12;
+  let AMPM = timeSplit[0] > 12 ? "PM" : "AM";
+  let newTime = `${hour}:${timeSplit[1]}:${timeSplit[2]} ${AMPM} `;
+  return `${newDate} - ${newTime}`;
 }

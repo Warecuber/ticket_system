@@ -16,10 +16,10 @@
       <div class="view">
         <select name="viewType" id="viewType">
           <option value="Open">Open</option>
-          <option value="Open">In Progress</option>
-          <option value="Open">Awaiting Response</option>
-          <option value="Open">Code Changes</option>
-          <option value="Open">Closed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Awaiting Response">Awaiting Response</option>
+          <option value="Code Changes">Code Changes</option>
+          <option value="Closed">Closed</option>
         </select>
       </div>
       <div class="contents">
@@ -34,7 +34,7 @@
         </table>
       </div>
     </div>
-    <div class="ticketDetails">
+    <!-- <div class="ticketDetails">
       <div class="overlayNav">
         <p class="overlayTitle">Teams Crashed</p>
         <div class="closeButton">
@@ -43,6 +43,78 @@
       </div>
       <div class="overlayDetails">
         <div class="branding">John's Ticket System</div>
+        <div class="divider"></div>
+        <div class="ticketData">
+          <div class="setting_item">
+            <p class="settingLabel">Assigned To</p>
+            <select name="" id="" class="settingSelect">
+              <option value="Unassigned">Unassigned</option>
+              <option value="John Ware">John Ware</option>
+            </select>
+          </div>
+          <div class="divider"></div>
+          <div class="setting_item">
+            <p class="settingLabel">Status</p>
+            <select
+              name=""
+              id=""
+              class="settingSelect"
+              onchange="updateTicket(this)"
+            >
+              <option value="Open">Open</option>
+              <option value="Awaiting Response">Awaiting Response</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Code Change">Code Change</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
+          <div class="divider"></div>
+          <div class="setting_item">
+            <p class="settingLabel">Priority</p>
+            <select
+              name=""
+              id=""
+              class="settingSelect"
+              onchange="updateTicket(this)"
+            >
+              <option value="Urgent">Urgent</option>
+              <option value="High">High</option>
+              <option value="Normal" selected>Normal</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div class="divider"></div>
+          <div class="setting_item">
+            <p class="settingLabel">Category</p>
+            <select
+              name=""
+              id=""
+              class="settingSelect"
+              onchange="updateTicket(this)"
+            >
+              <option value="Unassigned">Default</option>
+              <option value="Software">Software</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Developnent">Developnent</option>
+            </select>
+          </div>
+          <div class="divider"></div>
+          <div class="setting_item">
+            <p class="settingLabel">Sub Category</p>
+            <select
+              name=""
+              id=""
+              class="settingSelect"
+              onchange="updateTicket(this)"
+            >
+              <option value="Unassigned">Default</option>
+              <option value="Google Chrome">Google Chrome</option>
+              <option value="User Error">User Error</option>
+              <option value="Bug fix">Bug fix</option>
+              <option value="New Feature">New Feature</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div class="overlayBody">
         <div class="threadContainer">
@@ -70,12 +142,13 @@
             name="replyContent"
             id="replyContent"
             class="replyTextarea"
+            placeholder="Type a reply..."
           ></textarea>
           <div class="replyButtonContainer">
-            <button class='overlaySendButtonLower'>Send</button>
+            <button class="overlaySendButtonLower">Send</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </body>
   <script src="scripts/global/config.js"></script>

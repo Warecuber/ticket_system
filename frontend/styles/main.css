@@ -141,7 +141,7 @@ html {
   display: block;
   position: fixed;
   height: 100%;
-  top: 0;
+  bottom: -100%;
   width: 100%;
   background-color: var(--color-blue);
 }
@@ -184,7 +184,7 @@ html {
   outline: none;
 }
 .replyTextarea:focus {
-  border-color: var(--color-gray-5)
+  border-color: var(--color-gray-5);
 }
 .threadContainer {
   overflow-y: scroll;
@@ -201,9 +201,12 @@ html {
   width: 100%;
 }
 .overlayDetails {
+  overflow-y: scroll;
+  overflow: auto;
+  padding: 0 4px;
   position: absolute;
   z-index: 4;
-  width: 200px;
+  width: 192px;
   height: calc(100% - 67px);
   background-color: var(--color-gray-4);
   box-shadow: 2px 2px 6px var(--color-gray-5);
@@ -260,6 +263,45 @@ html {
   outline: none;
   box-shadow: var(--color-button-focus);
 }
+
+.overlayDetails .branding {
+  padding: 4px 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.overlayDetails .divider {
+  height: 8px;
+  width: 100%;
+}
+
+.settingLabel {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-white);
+}
+
+.setting_item {
+  padding: 16px 8px;
+  background-color: var(--color-gray-3);
+}
+
+.settingSelect {
+  width: 100%;
+  background-color: var(--color-gray-2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.settingSelect:active {
+  border-color: var(--color-blue);
+}
+
+/* ////////////// */
+/* @media styles */
+/* //////////// */
 
 @media only screen and (min-width: 700px) {
   .overlayBody {
