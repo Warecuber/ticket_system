@@ -42,4 +42,14 @@ router.get("/current", auth, async (req, res) => {
   res.send(currentUser);
 });
 
+router.get("/search", auth, async (req, res) => {
+  if (!req.user.scopes.includes("admin"))
+    return res.status(403).send("Unauthorized");
+  let usersearch = await User.find(
+    { email: { $regex: `${req.query.email}` } },
+    { password: 0, token: 0, date: 0 }
+  );
+  res.send(usersearch);
+});
+
 module.exports = router;

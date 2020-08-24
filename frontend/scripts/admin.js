@@ -1,63 +1,36 @@
 (() => {
-  queryRequest(endpoint_config.tickets.view_by_status, {
-    queryName: "status",
-    queryParam: "Open",
-  }).then((res) => {
-    if (res.error === "Invalid token") {
-      refreshToken().then((res) => {
-        if (res.status === 401 || res.status === 403) {
-          window.location.pathname = endpoint_config.front_end_pages.login;
-        } else if (res.status === 200) {
-          location.reload();
-        }
+  getRequest(endpoint_config.user.current).then((res) => {
+    if (res.name) {
+      $(".loggedInAs").html(res.name);
+    }
+  });
+  $("#openTickets").on("click", function () {
+    window.location.pathname = endpoint_config.front_end_pages.home;
+  });
+
+  $("#email").on("input", function () {
+    if (this.value) {
+      queryRequest(endpoint_config.user.search, {
+        queryName: "email",
+        queryParam: this.value,
+      }).then((res) => {
+        updateUI(res);
       });
-    } else {
-      getRequest(endpoint_config.user.current).then((res) => {
-        if (res.name) {
-          $(".loggedInAs").html(res.name);
-        }
-      });
-      updateUI(res);
     }
   });
 
-  $("#logout").on("click", function () {
-    window.location.pathname = endpoint_config.front_end_pages.logout;
-  });
-  $("#admin").on("click", function () {
-    window.location.pathname = endpoint_config.front_end_pages.admin;
-  });
-
-  $(".selectQuery").on("change", function () {
-    queryRequest(endpoint_config.tickets.view_by_status, {
-      queryName: "status",
-      queryParam: this.value,
-    }).then((res) => {
-      updateUI(res);
-    });
-  });
-
-  function refreshUI() {
-    queryRequest(endpoint_config.tickets.view_by_status, {
-      queryName: "status",
-      queryParam: document.getElementById("viewType").value,
-    }).then((res) => {
-      updateUI(res);
-    });
-  }
-
-  function updateUI(tickets) {
+  function updateUI(users) {
     let table = document.querySelector("#ticketTable");
     resetTable(table);
     let rows = table.rows.length;
-    tickets.forEach((el) => {
+    users.forEach((el) => {
       let newTR = table.insertRow(rows);
       newTR.classList.add("TicketRow");
-      newTR.dataset.id = el._id;
-      newTR.innerHTML = `<td class="ticketStatus ticket--${el.status}">${el.status}</td><td>${el.priority}</td><td>${el.subject}</td><td>${el.reporter}</td><td>${el.agent}</td>`;
+      newTR.dataset.email = el.email;
+      newTR.innerHTML = `<td>${el.name}</td><td>${el.username}</td><td>${el.email}</td>`;
       rows++;
     });
-    $(".TicketRow").on("click", openTicket);
+    $(".TicketRow").on("click", openUser);
   }
 
   function resetTable(table) {
@@ -66,15 +39,20 @@
     }
   }
 
-  function openTicket() {
-    queryRequest(endpoint_config.tickets.view_by_status, {
-      queryName: "id",
-      queryParam: this.dataset.id,
+  function openUser() {
+    queryRequest(endpoint_config.user.search, {
+      queryName: "email",
+      queryParam: this.dataset.email,
     }).then((res) => {
-      let ticketOverlay = new Overlay(res[0], "ticketOverlay");
+      let userOverlay = new Overlay(res[0], "userOverlay");
     });
   }
-
+  queryRequest(endpoint_config.user.search, {
+    queryName: "email",
+    queryParam: this.value,
+  }).then((res) => {
+    updateUI(res);
+  });
   function Overlay(data, varName) {
     this.data = data;
     this.varName = varName;

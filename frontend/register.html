@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Register</title>
+  </head>
+  <body>
+    <div class="login">
+      <p class="loginInfo">Welcome! Register below.</p>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="input-custom-field"
+        data-required="true"
+      />
+      <label for="email" data-label="Email"></label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        class="input-custom-field"
+        autocomplete="off"
+        data-required="true"
+      />
+      <label for="username" data-label="Username"></label>
+      <input
+        type="firstName"
+        name="firstName"
+        id="firstName"
+        class="input-custom-field"
+        data-required="true"
+        autocomplete="off"
+      />
+      <label for="firstName" data-label="First name"></label>
+      <input
+        type="lastName"
+        name="lastName"
+        id="lastName"
+        class="input-custom-field"
+        data-required="true"
+        autocomplete="off"
+      />
+      <label for="lastName" data-label="Last name"></label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        class="input-custom-field"
+        data-required="true"
+      />
+      <label for="password" data-label="Password"></label>
+      <p class="loginError"></p>
+      <button class="loginButton" id="register">Register</button>
+      <div class="loginText">
+        Already a user?
+        <span class="loginWindowButton" id="loginButton">Login</span>
+      </div>
+    </div>
+  </body>
+  <script src="scripts/global/config.js"></script>
+  <script src="scripts/register.js"></script>
+  <!-- <script>
+    
+  </script> -->
+</html>

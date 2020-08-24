@@ -17,6 +17,9 @@ router.post("/register", async (req, res) => {
   const emailExists = await User.findOne({ email: req.body.email });
   if (emailExists) return res.status(400).send("Email already exists");
 
+  const usernameExists = await User.findOne({ username: req.body.username });
+  if (usernameExists) return res.status(400).send("Username already exists");
+
   // hash password!
   // const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -44,7 +47,7 @@ router.post("/login", async (req, res) => {
 
   //check to see if the email exists
   const user = await User.findOne({ email: req.body.email });
-  console.log(user)
+  console.log(user);
   if (!user) return res.status(400).send("Email or password incorrect");
   // check if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -113,7 +116,13 @@ router.post("/refresh", refreshAuth, async (req, res) => {
     // if there's an error, return unathorized
     if (err) return res.sendStatus(403);
     // if it is valid, make a variable with the user information from the refresh token
-    const accessToken = generateAccessToken({ name: user.name });
+    const accessToken = generateAccessToken({
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+      name: user.name,
+      scopes: user.scopes,
+    });
     // return the new access token
     res.json({
       status: 200,

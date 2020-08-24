@@ -5,6 +5,7 @@
   --color-green: #007a0c;
   --color-brown: #44280e;
   --color-purple: #2e2845;
+  --color-gray-background: #A8B3A8;
   --color-gray-1: #6d7d70;
   --color-gray-2: #687868;
   --color-gray-3: #4c574e;
@@ -112,7 +113,7 @@ html {
   top: -32px;
   height: 100%;
   left: 104px;
-  width: auto;
+  width: 100px;
   transition: 0.1s all ease-in-out;
 }
 
@@ -150,7 +151,7 @@ html {
   display: block;
   position: fixed;
   height: 100%;
-  bottom: -100%;
+  bottom: 0%;
   width: 100%;
   left: 0;
   background-color: var(--color-blue);
@@ -179,6 +180,34 @@ html {
 .overlayBody {
   height: calc(100% - 60px);
   margin-left: 200px;
+}
+.overlayUserBody {
+  padding: 16px;
+}
+.userInput {
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-block;
+  background-color: var(--color-gray-background);
+  border-radius: 4px;
+  padding: 4px;
+  border: 2px solid var(--color-gray-4);
+  outline: none;
+}
+.userRow {
+  color: var(--color-gray-5);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px;
+  border-bottom: 2px solid var(--color-gray-4);
+  border-top: 2px solid transparent;
+}
+.userLabel {
+  display: inline-block;
+  width: 33%;
+  margin: 0 16px;
 }
 .replyTextarea {
   display: inline-block;
@@ -307,6 +336,12 @@ html {
 .selectQuery {
   border-radius: 8px;
 }
+.selectQueryInput::placeholder {
+  color: var(--color-gray-4);
+}
+.selectQueryInput {
+  cursor: text;
+}
 
 .settingSelect {
   border-radius: 4px;
@@ -371,6 +406,51 @@ html {
 .errorBanner {
   background-color: var(--color-red);
 }
+.loginText {
+  color: var(--color-gray-5);
+}
+.loginWindowButton {
+  text-decoration: underline;
+  color: var(--color-blue);
+  cursor: pointer;
+}
+.loginWindowButton:hover {
+  color: var(--color-gray-4);
+}
+
+.userContainer {
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid var(--color-gray-4);
+  background: var(--color-gray-2);
+}
+.outsideBorder {
+  border: 2px solid var(--color-gray-4);
+  border-radius: 8px;
+}
+.row-no-border {
+  border: none !important;
+}
+.updateUser {
+  width: 100%;
+  margin: 0 8px;
+  padding: 0;
+  color: var(--color-white);
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: var(--color-green);
+  outline: none;
+  border: 2px solid var(--color-gray-4);
+  transition: 0.1s all ease-in-out;
+}
+
+.updateUser:hover {
+  cursor: pointer;
+  background-color: var(--color-blue);
+}
+.updateUser:focus {
+  box-shadow: var(--color-button-focus);
+}
 
 /* ////////////// */
 /* @media styles */
@@ -379,5 +459,8 @@ html {
 @media only screen and (min-width: 700px) {
   .overlayBody {
     padding: 0 15%;
+  }
+  .overlayUserBody {
+    padding: 16px 20%;
   }
 }

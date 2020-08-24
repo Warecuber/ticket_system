@@ -9,45 +9,43 @@
       src="https://kit.fontawesome.com/331e82cb9d.js"
       crossorigin="anonymous"
     ></script>
-    <title>Home</title>
+    <title>Admin</title>
   </head>
   <body>
     <div class="header">
-      <button class="headerItem" id="admin">admin</button>
+      <button class="headerItem" id="openTickets">tickets</button>
       <button class="headerItem" id="logout">
         Log out as <span class="loggedInAs"></span>
       </button>
     </div>
     <div class="body">
       <div class="view">
-        <select name="viewType" id="viewType" class="selectQuery">
-          <option value="Open">Open</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Awaiting Response">Awaiting Response</option>
-          <option value="Code Change">Code Change</option>
-          <option value="Closed">Closed</option>
-        </select>
+        <input
+          name="email"
+          id="email"
+          class="selectQuery selectQueryInput"
+          placeholder="Email address"
+          autocomplete="off"
+        />
       </div>
       <div class="contents">
         <table id="ticketTable">
           <tr class="ticketTitleRow">
-            <td>Status</td>
-            <td>Priority</td>
-            <td>Title</td>
-            <td>Reporter</td>
-            <td>Agent</td>
+            <td>Name</td>
+            <td>Username</td>
+            <td>Email</td>
           </tr>
         </table>
       </div>
     </div>
-    <!-- <div class="ticketDetails">
+    <div class="ticketDetails">
       <div class="overlayNav">
-        <p class="overlayTitle">Teams Crashed</p>
+        <p class="overlayTitle">John Ware</p>
         <div class="closeButton">
           <i class="far fa-times-circle closeButton"></i>
         </div>
       </div>
-      <div class="overlayDetails">
+      <!-- <div class="overlayDetails">
         <div class="branding">John's Ticket System</div>
         <div class="divider"></div>
         <div class="ticketData">
@@ -121,9 +119,35 @@
             </select>
           </div>
         </div>
-      </div>
-      <div class="overlayBody">
-        <div class="threadContainer">
+      </div> -->
+      <div class="overlayUserBody">
+        <div class="userContainer">
+          <div class="outsideBorder">
+            <div class="userRow">
+              <p class="userLabel">Email</p>
+              <input type="email" class="userInput" id="userEmail" />
+            </div>
+            <div class="userRow">
+              <p class="userLabel">Name</p>
+              <input type="Name" class="userInput" id="userEmail" />
+            </div>
+            <div class="userRow">
+              <p class="userLabel">Username</p>
+              <input type="text" class="userInput" id="username" />
+              <button class="updateUser" data-field="username">
+                Update username
+              </button>
+            </div>
+            <div class="userRow row-no-border">
+              <p class="userLabel">Password</p>
+              <input type="password" class="userInput" id="userPasword" />
+              <button class="updateUser" data-field="userPasword">
+                Update password
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="threadContainer">
           <div class="thread reporter">
             <div class="replyHeader">
               <span class="replyName">John Ware</span>
@@ -142,8 +166,8 @@
               Hi John, can you try restarting your computer?
             </div>
           </div>
-        </div>
-        <div class="replyContainer">
+        </div> -->
+        <!-- <div class="replyContainer">
           <textarea
             name="replyContent"
             id="replyContent"
@@ -153,10 +177,10 @@
           <div class="replyButtonContainer">
             <button class="overlaySendButtonLower">Send</button>
           </div>
-        </div>
+        </div> -->
       </div>
-    </div>-->
+    </div>
   </body>
   <script src="scripts/global/config.js"></script>
-  <script src="scripts/home.js"></script>
+  <script src="scripts/admin.js"></script>
 </html>

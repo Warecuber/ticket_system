@@ -4,23 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css" />
     <title>Login</title>
   </head>
   <body>
     <div class="login">
       <p class="loginInfo">Welcome! Login to begin.</p>
-      <input type="email" name="email" id="email" class="input-custom-field" data-required="true"/>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="input-custom-field"
+        data-required="true"
+      />
       <label for="email" data-label="Email"></label>
-      <input type="password" name="password" id="password" class="input-custom-field" data-required="true"/>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        class="input-custom-field"
+        data-required="true"
+      />
       <label for="password" data-label="Password"></label>
       <p class="loginError"></p>
-      <button class="loginButton">Login</button>
+      <button class="loginButton" id="login">Login</button>
+      <button class="loginButton" id="register">Register</button>
     </div>
   </body>
-  <script src=scripts/global/config.js></script>
-  <script src=scripts/login.js></script>
-  <!-- <script>
-    
-  </script> -->
+  <script src="scripts/global/config.js"></script>
+  <script src="scripts/login.js"></script>
 </html>

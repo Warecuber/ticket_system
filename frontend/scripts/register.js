@@ -12,31 +12,37 @@
       console.log(err);
     }
   }
-  $("#login").on("click", checkPasswd);
+  $("#register").on("click", checkPasswd);
   document.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       checkPasswd();
     }
   });
-  $("#register").on("click", function () {
-    window.location.pathname = endpoint_config.front_end_pages.register;
+  $("#loginButton").on("click", function () {
+    window.location.pathname = endpoint_config.front_end_pages.login;
   });
 
   async function checkPasswd() {
     if (checkRequired() > 0) {
       $(".loginError").html("Missing required fields");
     } else {
-      postRequest(endpoint_config.auth.login, {
+      postRequest(endpoint_config.auth.register, {
         email: document.querySelector("#email").value,
+        name: `${document.querySelector("#firstName").value} ${
+          document.querySelector("#lastName").value
+        }`,
+        username: document.querySelector("#username").value,
         password: document.querySelector("#password").value,
       }).then((res) => {
         if (res.status === 400) {
           $(".loginError").html(res.error);
         }
-        if (res.token) {
-          localStorage.setItem("authtoken", `Bearer ${res.token}`);
-          localStorage.setItem("refresh_token", res.refresh_token);
-          window.location.pathname = endpoint_config.front_end_pages.home;
+        if (res.user) {
+          $(".loginError").css({ color: "#007a0c" });
+          $(".loginError").html("Account successfully created!");
+          setTimeout(() => {
+            window.location.pathname = endpoint_config.front_end_pages.login;
+          }, 1500);
         }
       });
     }

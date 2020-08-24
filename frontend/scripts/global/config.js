@@ -16,6 +16,7 @@ let endpoint_config = (() => {
       logout: `${base_config.auth}/logout`,
       refresh: `${base_config.auth}/refresh`,
       validate: `${base_config.auth}/validate`,
+      register: `${base_config.auth}/register`,
     },
     tickets: {
       view: `${base_config.tickets}/get`,
@@ -25,11 +26,14 @@ let endpoint_config = (() => {
     },
     user: {
       current: `${base_config.user}/current`,
+      search:  `${base_config.user}/search`,
     },
     front_end_pages: {
       login: "/login",
       logout: "/logout",
       home: "/home",
+      register: "/register",
+      admin: "/admin",
     },
   };
 
@@ -188,9 +192,9 @@ Banner.prototype.create = function () {
   setTimeout(() => {
     that.slideUp();
     setTimeout(() => {
-      document.querySelector('.banner').remove();
-    }, 100)
-  }, 3000)
+      document.querySelector(".banner").remove();
+    }, 100);
+  }, 3000);
 };
 
 Banner.prototype.slideDown = function () {
@@ -224,3 +228,9 @@ Banner.prototype.slideUp = function () {
     }
   }
 };
+
+
+// auto refresh every 10 minutes
+setInterval(() => {
+  refreshToken();
+}, 60000)
