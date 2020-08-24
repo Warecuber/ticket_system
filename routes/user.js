@@ -87,4 +87,15 @@ router.get("/search", auth, async (req, res) => {
   res.send(usersearch);
 });
 
+router.get("/find/agent", auth, async (req, res) => {
+  if (!req.user.scopes.includes("agent"))
+    return res.status(403).send("Unauthorized");
+
+  let usersearch = await User.find(
+    { scopes: { $regex: "agent" } },
+    { password: 0, token: 0, date: 0, email: 0 }
+  );
+  res.send(usersearch);
+});
+
 module.exports = router;

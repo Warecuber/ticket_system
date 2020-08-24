@@ -66,6 +66,22 @@
     }
   }
 
+  function getAgents() {
+    queryRequest(endpoint_config.user.agent, {
+      queryName: "scope",
+      queryParam: "agent",
+    }).then((res) => {
+      let where = document.getElementById("assignedTo");
+      res.forEach((el) => {
+        let agent = document.createElement("option");
+        agent.value = el.name;
+        agent.innerHTML = el.name;
+        where.insertAdjacentElement("beforeend", agent);
+      });
+      console.log(res);
+    });
+  }
+
   function openTicket() {
     queryRequest(endpoint_config.tickets.view_by_status, {
       queryName: "id",
@@ -88,7 +104,7 @@
 
     newContainer.innerHTML = `<div class="overlayNav"><p class="overlayTitle">${
       this.data.subject
-    }</p><div class="closeButton"> <i class="far fa-times-circle"></i></div></div><div class="overlayDetails"><div class="divider"></div><div class="branding">John's Ticket System</div><div class="divider"></div><div class="ticketData"><div class="setting_item"><p class="settingLabel">Assigned To</p><select name="assignedTo" id="assignedTo" class="settingSelect"><option value="Unassigned">Unassigned</option><option value="John Ware">John Ware</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Status</p> <select name="status" id="status" class="settingSelect"><option value="Open">Open</option><option value="Awaiting Response">Awaiting Response</option><option value="In Progress">In Progress</option><option value="Code Change">Code Change</option><option value="Closed">Closed</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Priority</p> <select name="priority" id="priority" class="settingSelect"><option value="Urgent">Urgent</option><option value="High">High</option><option value="Normal" selected>Normal</option><option value="Low">Low</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Category</p><select name="category" id="category" class="settingSelect"><option value="Unassigned">Default</option><option value="Software">Software</option><option value="Hardware">Hardware</option><option value="Developnent">Developnent</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Sub Category</p><select name="subCategory" id="subCategory" class="settingSelect"><option value="Unassigned">Default</option><option value="Google Chrome">Google Chrome</option><option value="User Error">User Error</option><option value="Bug fix">Bug fix</option><option value="New Feature">New Feature</option></select></div></div><div class="ticketSettingsButtons"><button class='overlaySendButtonLower' data-id="${
+    }</p><div class="closeButton"> <i class="far fa-times-circle"></i></div></div><div class="overlayDetails"><div class="divider"></div><div class="branding">John's Ticket System</div><div class="divider"></div><div class="ticketData"><div class="setting_item"><p class="settingLabel">Assigned To</p><select name="assignedTo" id="assignedTo" class="settingSelect"><option value="Unassigned">Unassigned</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Status</p> <select name="status" id="status" class="settingSelect"><option value="Open">Open</option><option value="Awaiting Response">Awaiting Response</option><option value="In Progress">In Progress</option><option value="Code Change">Code Change</option><option value="Closed">Closed</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Priority</p> <select name="priority" id="priority" class="settingSelect"><option value="Urgent">Urgent</option><option value="High">High</option><option value="Normal" selected>Normal</option><option value="Low">Low</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Category</p><select name="category" id="category" class="settingSelect"><option value="Unassigned">Default</option><option value="Software">Software</option><option value="Hardware">Hardware</option><option value="Developnent">Developnent</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Sub Category</p><select name="subCategory" id="subCategory" class="settingSelect"><option value="Unassigned">Default</option><option value="Google Chrome">Google Chrome</option><option value="User Error">User Error</option><option value="Bug fix">Bug fix</option><option value="New Feature">New Feature</option></select></div></div><div class="ticketSettingsButtons"><button class='overlaySendButtonLower' data-id="${
       this.data._id
     }">save</button></div></div></div><div class="overlayBody"><div class="threadContainer"><div class="thread reporter"><div class="replyHeader"><span class="replyName">${
       this.data.reporter
@@ -98,6 +114,7 @@
       this.data.description
     }</div></div></div><div class="replyContainer"><textarea name="replyContent"id="replyContent"class="replyTextarea" placeholder="Type a reply..."></textarea><div class="replyButtonContainer"><button class="overlaySendButtonLower">Send</button></div></div>`;
     mainContainer.insertAdjacentElement("beforeend", newContainer);
+    getAgents();
     this.setOptions();
     this.eventListeners();
     this.slideUp();

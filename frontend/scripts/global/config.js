@@ -28,6 +28,7 @@ let endpoint_config = (() => {
       current: `${base_config.user}/current`,
       search: `${base_config.user}/search`,
       update: `${base_config.user}/update`,
+      agent: `${base_config.user}/find/agent`,
     },
     front_end_pages: {
       login: "/login",
