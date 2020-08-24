@@ -5,7 +5,7 @@
   --color-green: #007a0c;
   --color-brown: #44280e;
   --color-purple: #2e2845;
-  --color-gray-background: #A8B3A8;
+  --color-gray-background: #a8b3a8;
   --color-gray-1: #6d7d70;
   --color-gray-2: #687868;
   --color-gray-3: #4c574e;
@@ -182,11 +182,14 @@ html {
   margin-left: 200px;
 }
 .overlayUserBody {
+  overflow-y: scroll;
+  overflow: auto;
+  height: calc(100% - 100px);
   padding: 16px;
 }
 .userInput {
-  box-sizing: border-box;
   width: 100%;
+  box-sizing: border-box;
   display: inline-block;
   background-color: var(--color-gray-background);
   border-radius: 4px;
@@ -195,7 +198,7 @@ html {
   outline: none;
 }
 .userRow {
-  color: var(--color-gray-5);
+  color: var(--color-white);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -427,14 +430,13 @@ html {
 .outsideBorder {
   border: 2px solid var(--color-gray-4);
   border-radius: 8px;
+  box-shadow: 2px 2px 8px var(--color-gray-5);
 }
 .row-no-border {
   border: none !important;
 }
 .updateUser {
-  width: 100%;
   margin: 0 8px;
-  padding: 0;
   color: var(--color-white);
   border-radius: 4px;
   padding: 4px 8px;
@@ -443,6 +445,12 @@ html {
   border: 2px solid var(--color-gray-4);
   transition: 0.1s all ease-in-out;
 }
+.two-thirds-width {
+  flex-grow: 1;
+  flex-direction: row;
+  display: flex;
+  width: 66.6%;
+}
 
 .updateUser:hover {
   cursor: pointer;
@@ -450,6 +458,57 @@ html {
 }
 .updateUser:focus {
   box-shadow: var(--color-button-focus);
+}
+.userSectionHeader {
+  font-size: 24px;
+  color: var(--color-font-gray);
+  margin: 4px;
+}
+
+.scopeLabel {
+  position: relative;
+  margin-left: 28px;
+}
+.userCheckbox {
+  display: none;
+}
+.scopeLabel::before {
+  content: "";
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  left: -24px;
+  top: 1px;
+  background-color: var(--color-blue);
+  border-radius: 4px;
+  border: 2px solid var(--color-gray-5);
+}
+.customCheckbox {
+  color: var(--color-white);
+}
+.customCheckbox label:hover {
+  cursor: pointer;
+}
+
+.customCheckbox input:hover ~ label::before {
+  content: "\f00c";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  color: var(--color-gray-2);
+}
+.customCheckbox {
+  display: inline-block;
+}
+.customCheckbox input:checked ~ label::before,
+.customCheckbox input:active ~ label::before {
+  content: "\f00c";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  color: var(--color-white);
+}
+
+.scopeSettings {
+  margin: 8px;
 }
 
 /* ////////////// */

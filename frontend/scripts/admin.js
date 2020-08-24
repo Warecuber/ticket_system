@@ -64,28 +64,20 @@
     let newContainer = document.createElement("div");
     newContainer.classList.add("ticketDetails");
 
-    newContainer.innerHTML = `<div class="overlayNav"><p class="overlayTitle">${
-      this.data.subject
-    }</p><div class="closeButton"> <i class="far fa-times-circle"></i></div></div><div class="overlayDetails"><div class="divider"></div><div class="branding">John's Ticket System</div><div class="divider"></div><div class="ticketData"><div class="setting_item"><p class="settingLabel">Assigned To</p><select name="assignedTo" id="assignedTo" class="settingSelect"><option value="Unassigned">Unassigned</option><option value="John Ware">John Ware</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Status</p> <select name="status" id="status" class="settingSelect"><option value="Open">Open</option><option value="Awaiting Response">Awaiting Response</option><option value="In Progress">In Progress</option><option value="Code Change">Code Change</option><option value="Closed">Closed</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Priority</p> <select name="priority" id="priority" class="settingSelect"><option value="Urgent">Urgent</option><option value="High">High</option><option value="Normal" selected>Normal</option><option value="Low">Low</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Category</p><select name="category" id="category" class="settingSelect"><option value="Unassigned">Default</option><option value="Software">Software</option><option value="Hardware">Hardware</option><option value="Developnent">Developnent</option></select></div><div class="divider"></div><div class="setting_item"><p class="settingLabel">Sub Category</p><select name="subCategory" id="subCategory" class="settingSelect"><option value="Unassigned">Default</option><option value="Google Chrome">Google Chrome</option><option value="User Error">User Error</option><option value="Bug fix">Bug fix</option><option value="New Feature">New Feature</option></select></div></div><div class="ticketSettingsButtons"><button class='overlaySendButtonLower' data-id="${
-      this.data._id
-    }">save</button></div></div></div><div class="overlayBody"><div class="threadContainer"><div class="thread reporter"><div class="replyHeader"><span class="replyName">${
-      this.data.reporter
-    }</span><span class="replyDate">${formatDateTime(
-      this.data.date
-    )}</span></div><div class="replyContents">${
-      this.data.description
-    }</div></div></div><div class="replyContainer"><textarea name="replyContent"id="replyContent"class="replyTextarea" placeholder="Type a reply..."></textarea><div class="replyButtonContainer"><button class="overlaySendButtonLower">Send</button></div></div>`;
+    newContainer.innerHTML = `<div class="overlayNav"><p class="overlayTitle">${this.data.name}</p><div class="closeButton"> <i class="far fa-times-circle"></i></div></div><div class="overlayUserBody"><div class="userContainer"><p class="userSectionHeader">Account Settings:</p><div class="outsideBorder"><div class="userRow"><p class="userLabel">Email</p><div class="two-thirds-width"> <input type="email" class="userInput" id="userEmail" /> <button class="updateUser" data-field="userEmail" data-endpoint="email"> Save </button></div></div><div class="userRow"><p class="userLabel">Name</p><div class="two-thirds-width"> <input type="Name" class="userInput" id="userFullName" /><button class="updateUser" data-field="userFullName" data-endpoint="name"> Save </button></div></div><div class="userRow"><p class="userLabel">Username</p><div class="two-thirds-width"> <input type="text" class="userInput" id="username" /> <button class="updateUser" data-field="username" data-endpoint="username"> Save </button></div></div><div class="userRow row-no-border"><p class="userLabel">Password</p><div class="two-thirds-width"> <input type="password" class="userInput" id="userPasword" /> <button class="updateUser" data-field="userPasword" data-endpoint="password"> Save </button></div></div></div><div class="scopes"><p class="userSectionHeader">Scopes:</p><div class="outsideBorder"><div class="scopeSettings"><div class="customCheckbox"> <input type="checkbox" class="userCheckbox" name="scopeAgent" id="scopeagent" value="agent" /> <label for="scopeagent" class="scopeLabel">Agent</label></div><div class="customCheckbox"> <input type="checkbox" class="userCheckbox" name="scopeAdmin" id="scopeadmin" value="admin" /> <label for="scopeadmin" class="scopeLabel">Admin</label></div><div class="customCheckbox"> <input type="checkbox" class="userCheckbox" name="scopeCreate" id="scopecreate" value="create" /> <label for="scopecreate" class="scopeLabel">Create</label></div></div></div></div></div>`;
     mainContainer.insertAdjacentElement("beforeend", newContainer);
     this.setOptions();
     this.eventListeners();
     this.slideUp();
   };
   Overlay.prototype.setOptions = function () {
-    document.getElementById("assignedTo").value = this.data.agent;
-    document.getElementById("status").value = this.data.status;
-    document.getElementById("priority").value = this.data.priority;
-    document.getElementById("category").value = this.data.category;
-    document.getElementById("subCategory").value = this.data.sub_category;
+    document.getElementById("userEmail").value = this.data.email;
+    document.getElementById("userFullName").value = this.data.name;
+    document.getElementById("username").value = this.data.username;
+    this.data.scopes.forEach((el) => {
+      console.log(el);
+      document.getElementById(`scope${el}`).checked = true;
+    });
   };
   Overlay.prototype.slideUp = function () {
     let currentPos = -100;
@@ -117,7 +109,7 @@
         currentPos--;
       }
     }
-    refreshUI();
+    // refreshUI();
     setTimeout(() => {
       document.querySelector(".ticketDetails").remove();
     }, 1000);
@@ -128,24 +120,60 @@
     $(".closeButton").on("click", function () {
       that.slideDown();
     });
-    $(".overlaySendButtonLower").on("click", function () {
-      let assignedTo = document.getElementById("assignedTo").value;
-      let status = document.getElementById("status").value;
-      let priority = document.getElementById("priority").value;
-      let category = document.getElementById("category").value;
-      let subCategory = document.getElementById("subCategory").value;
-      patchRequest(endpoint_config.tickets.update, {
-        ticket: this.dataset.id,
-        assignedTo: assignedTo,
-        status: status,
-        priority: priority,
-        category: category,
-        subCategory: subCategory,
+    $(".updateUser").on("click", function () {
+      console.log(`${endpoint_config.user.update}/${this.dataset.endpoint}`);
+      postRequest(`${endpoint_config.user.update}/${this.dataset.endpoint}`, {
+        data: document.getElementById(this.dataset.field).value,
+        _id: that.data._id,
       }).then((res) => {
-        if (res.status === 200) {
-          let successBanner = new Banner("Saved", "successBanner");
+        if (res.status === 400) {
+          let errorBanner = new Banner(res.error, "errorBanner");
+        } else {
+          let successBanner = new Banner("Updated user", "successBanner");
         }
       });
     });
+    $(".userCheckbox").on("change", function () {
+      postRequest(`${endpoint_config.user.update}/scopes`, {
+        data: generateScopes(),
+        _id: that.data._id,
+      }).then((res) => {
+        if (res.ok === 1) {
+          let successBanner = new Banner("Updated user", "successBanner");
+        } else {
+          let errorBanner = new Banner(res.error, "errorBanner");
+        }
+      });
+    });
+    // $(".overlaySendButtonLower").on("click", function () {
+    //   let assignedTo = document.getElementById("assignedTo").value;
+    //   let status = document.getElementById("status").value;
+    //   let priority = document.getElementById("priority").value;
+    //   let category = document.getElementById("category").value;
+    //   let subCategory = document.getElementById("subCategory").value;
+    //   patchRequest(endpoint_config.tickets.update, {
+    //     ticket: this.dataset.id,
+    //     assignedTo: assignedTo,
+    //     status: status,
+    //     priority: priority,
+    //     category: category,
+    //     subCategory: subCategory,
+    //   }).then((res) => {
+    //     if (res.status === 200) {
+    //       let successBanner = new Banner("Saved", "successBanner");
+    //     }
+    //   });
+    // });
   };
+
+  function generateScopes() {
+    let scopeArr = [];
+    let scopeList = document.querySelectorAll(".userCheckbox");
+    scopeList.forEach((el) => {
+      if (el.checked) {
+        scopeArr.push(el.value);
+      }
+    });
+    return scopeArr;
+  }
 })();

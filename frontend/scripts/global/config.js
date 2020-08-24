@@ -26,7 +26,8 @@ let endpoint_config = (() => {
     },
     user: {
       current: `${base_config.user}/current`,
-      search:  `${base_config.user}/search`,
+      search: `${base_config.user}/search`,
+      update: `${base_config.user}/update`,
     },
     front_end_pages: {
       login: "/login",
@@ -229,8 +230,7 @@ Banner.prototype.slideUp = function () {
   }
 };
 
-
 // auto refresh every 10 minutes
 setInterval(() => {
   refreshToken();
-}, 60000)
+}, 60000);

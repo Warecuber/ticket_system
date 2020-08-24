@@ -38,147 +38,95 @@
         </table>
       </div>
     </div>
-    <div class="ticketDetails">
+    <!-- <div class="ticketDetails">
       <div class="overlayNav">
         <p class="overlayTitle">John Ware</p>
         <div class="closeButton">
           <i class="far fa-times-circle closeButton"></i>
         </div>
       </div>
-      <!-- <div class="overlayDetails">
-        <div class="branding">John's Ticket System</div>
-        <div class="divider"></div>
-        <div class="ticketData">
-          <div class="setting_item">
-            <p class="settingLabel">Assigned To</p>
-            <select name="" id="" class="settingSelect">
-              <option value="Unassigned">Unassigned</option>
-              <option value="John Ware">John Ware</option>
-            </select>
-          </div>
-          <div class="divider"></div>
-          <div class="setting_item">
-            <p class="settingLabel">Status</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-              onchange="updateTicket(this)"
-            >
-              <option value="Open">Open</option>
-              <option value="Awaiting Response">Awaiting Response</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Code Change">Code Change</option>
-              <option value="Closed">Closed</option>
-            </select>
-          </div>
-          <div class="divider"></div>
-          <div class="setting_item">
-            <p class="settingLabel">Priority</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-              onchange="updateTicket(this)"
-            >
-              <option value="Urgent">Urgent</option>
-              <option value="High">High</option>
-              <option value="Normal" selected>Normal</option>
-              <option value="Low">Low</option>
-            </select>
-          </div>
-          <div class="divider"></div>
-          <div class="setting_item">
-            <p class="settingLabel">Category</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-              onchange="updateTicket(this)"
-            >
-              <option value="Unassigned">Default</option>
-              <option value="Software">Software</option>
-              <option value="Hardware">Hardware</option>
-              <option value="Developnent">Developnent</option>
-            </select>
-          </div>
-          <div class="divider"></div>
-          <div class="setting_item">
-            <p class="settingLabel">Sub Category</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-              onchange="updateTicket(this)"
-            >
-              <option value="Unassigned">Default</option>
-              <option value="Google Chrome">Google Chrome</option>
-              <option value="User Error">User Error</option>
-              <option value="Bug fix">Bug fix</option>
-              <option value="New Feature">New Feature</option>
-            </select>
-          </div>
-        </div>
-      </div> -->
       <div class="overlayUserBody">
         <div class="userContainer">
+          <p class="userSectionHeader">Account Settings:</p>
           <div class="outsideBorder">
             <div class="userRow">
               <p class="userLabel">Email</p>
-              <input type="email" class="userInput" id="userEmail" />
+              <div class="two-thirds-width">
+                <input type="email" class="userInput" id="userEmail" />
+                <button class="updateUser" data-field="userEmail">
+                  Save
+                </button>
+              </div>
             </div>
             <div class="userRow">
               <p class="userLabel">Name</p>
-              <input type="Name" class="userInput" id="userEmail" />
+              <div class="two-thirds-width">
+                <input type="Name" class="userInput" id="userFullName" /><button
+                  class="updateUser"
+                  data-field="userFullName"
+                >
+                  Save
+                </button>
+              </div>
             </div>
             <div class="userRow">
               <p class="userLabel">Username</p>
-              <input type="text" class="userInput" id="username" />
-              <button class="updateUser" data-field="username">
-                Update username
-              </button>
+              <div class="two-thirds-width">
+                <input type="text" class="userInput" id="username" />
+                <button class="updateUser" data-field="username">
+                  Save
+                </button>
+              </div>
             </div>
             <div class="userRow row-no-border">
               <p class="userLabel">Password</p>
-              <input type="password" class="userInput" id="userPasword" />
-              <button class="updateUser" data-field="userPasword">
-                Update password
-              </button>
+              <div class="two-thirds-width">
+                <input type="password" class="userInput" id="userPasword" />
+                <button class="updateUser" data-field="userPasword">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="scopes">
+            <p class="userSectionHeader">Scopes:</p>
+            <div class="outsideBorder">
+              <div class="scopeSettings">
+                <div class="customCheckbox">
+                  <input
+                    type="checkbox"
+                    class="userCheckbox"
+                    name="scopeUser"
+                    id="scopeUser"
+                    value="user"
+                  />
+                  <label for="scopeUser" class="scopeLabel">User</label>
+                </div>
+                <div class="customCheckbox">
+                  <input
+                    type="checkbox"
+                    class="userCheckbox"
+                    name="scopeAdmin"
+                    id="scopeAdmin"
+                    value="admin"
+                  />
+                  <label for="scopeAdmin" class="scopeLabel">Admin</label>
+                </div>
+                <div class="customCheckbox">
+                  <input
+                    type="checkbox"
+                    class="userCheckbox"
+                    name="scopeCreate"
+                    id="scopeCreate"
+                    value="create"
+                  />
+                  <label for="scopeCreate" class="scopeLabel">Create</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <!-- <div class="threadContainer">
-          <div class="thread reporter">
-            <div class="replyHeader">
-              <span class="replyName">John Ware</span>
-              <span class="replyDate">8/21/20 1:26PM</span>
-            </div>
-            <div class="replyContents">
-              Teams crashed and doesn't want to open.
-            </div>
-          </div>
-          <div class="thread agent">
-            <div class="replyHeader">
-              <span class="replyName">John Ware</span>
-              <span class="replyDate">8/21/20 5:23PM</span>
-            </div>
-            <div class="replyContents">
-              Hi John, can you try restarting your computer?
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="replyContainer">
-          <textarea
-            name="replyContent"
-            id="replyContent"
-            class="replyTextarea"
-            placeholder="Type a reply..."
-          ></textarea>
-          <div class="replyButtonContainer">
-            <button class="overlaySendButtonLower">Send</button>
-          </div>
-        </div> -->
-      </div>
+      </div> -->
     </div>
   </body>
   <script src="scripts/global/config.js"></script>

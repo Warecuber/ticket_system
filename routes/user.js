@@ -5,14 +5,15 @@ const bcrypt = require("bcryptjs");
 const { ticketValidation } = require("../validation");
 
 router.post("/update/scopes", auth, async (req, res) => {
-  if (!req.user.scopes.admin) return res.status(403).send("Unauthorized");
-  if (!req.body.scopes) return res.status(400).send("Missing params");
+  if (!req.user.scopes.includes("admin"))
+    return res.status(403).send("Unauthorized");
+  if (!req.body.data) return res.status(400).send("Missing params");
   const user = await User.updateOne(
-    { email: req.user.email },
-    { scopes: req.body.scopes },
+    { _id: req.body._id },
+    { scopes: req.body.data },
     (err, updated) => {
       if (err) return res.status(404).send("user not found");
-      res.status(300).send(updated);
+      res.status(200).send(updated);
     }
   );
 });
@@ -20,15 +21,49 @@ router.post("/update/scopes", auth, async (req, res) => {
 router.post("/update/password", auth, async (req, res) => {
   if (!req.user.scopes.includes("admin"))
     return res.status(403).send("Unauthorized");
-  if (!req.body.password) return res.status(400).send("missing params");
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  if (!req.body.data) return res.status(400).send("missing params");
+  const hashedPassword = await bcrypt.hash(req.body.data, 10);
 
   const user = await User.updateOne(
-    { email: req.body.email },
+    { _id: req.body._id },
     { password: hashedPassword },
     (err, updated) => {
       if (err) return res.status(404).send("user not found");
-      res.status(300).send(updated);
+      res.status(200).send(updated);
+    }
+  );
+});
+
+router.post("/update/email", auth, async (req, res) => {
+  if (!req.user.scopes.includes("admin"))
+    return res.status(403).send("Unauthorized");
+  if (!req.body.data) return res.status(400).send("missing params");
+  const userexists = await User.findOne({ email: req.body.data });
+  if (userexists) return res.status(400).send("Email address already exists");
+
+  const user = await User.updateOne(
+    { _id: req.body._id },
+    { email: req.body.data },
+    (err, updated) => {
+      if (err) return res.status(404).send("user not found");
+      res.status(200).send(updated);
+    }
+  );
+});
+
+router.post("/update/username", auth, async (req, res) => {
+  if (!req.user.scopes.includes("admin"))
+    return res.status(403).send("Unauthorized");
+  if (!req.body.data) return res.status(400).send("missing params");
+  const userexists = await User.findOne({ username: req.body.data });
+  if (userexists) return res.status(400).send("Username already exists");
+
+  const user = await User.updateOne(
+    { _id: req.body._id },
+    { username: req.body.data },
+    (err, updated) => {
+      if (err) return res.status(404).send("User not found");
+      res.status(200).send(updated);
     }
   );
 });
