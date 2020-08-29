@@ -66,7 +66,7 @@
     }
   }
 
-  function getAgents() {
+  function getAgents(assigned_agent) {
     queryRequest(endpoint_config.user.agent, {
       queryName: "scope",
       queryParam: "agent",
@@ -76,9 +76,14 @@
         let agent = document.createElement("option");
         agent.value = el.name;
         agent.innerHTML = el.name;
+        console.log(assigned_agent, el.name);
+        if (assigned_agent === el.name) {
+          console.log("found owner");
+          agent.selected = true;
+        }
         where.insertAdjacentElement("beforeend", agent);
+        return "complete";
       });
-      console.log(res);
     });
   }
 
@@ -114,17 +119,17 @@
       this.data.description
     }</div></div></div><div class="replyContainer"><textarea name="replyContent"id="replyContent"class="replyTextarea" placeholder="Type a reply..."></textarea><div class="replyButtonContainer"><button class="overlaySendButtonLower">Send</button></div></div>`;
     mainContainer.insertAdjacentElement("beforeend", newContainer);
-    getAgents();
+    getAgents(this.data.agent);
     this.setOptions();
     this.eventListeners();
     this.slideUp();
   };
   Overlay.prototype.setOptions = function () {
-    document.getElementById("assignedTo").value = this.data.agent;
     document.getElementById("status").value = this.data.status;
     document.getElementById("priority").value = this.data.priority;
     document.getElementById("category").value = this.data.category;
     document.getElementById("subCategory").value = this.data.sub_category;
+    document.getElementById("assignedTo").value = this.data.agent;
   };
   Overlay.prototype.slideUp = function () {
     let currentPos = -100;
