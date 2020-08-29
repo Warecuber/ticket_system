@@ -129,6 +129,14 @@ html {
   display: flex;
   flex-direction: column;
 }
+.view {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
 .ticketStatus .open {
   color: var(--color-green);
 }
@@ -151,10 +159,21 @@ html {
   display: block;
   position: fixed;
   height: 100%;
-  bottom: -100%;
+  top: 0;
+  /* bottom: -100%; */
   width: 100%;
   left: 0;
   background-color: var(--color-blue);
+}
+.inputFieldInTicketCreate {
+  margin: 0 0 16px 0;
+}
+
+.newTicketDetails {
+  background-color: var(--color-gray-4);
+  padding: 16px;
+  border: 2px solid var(--color-gray-5);
+  box-shadow: 2px 2px 8px var(--color-gray-5);
 }
 .overlayNav {
   display: flex;
@@ -329,20 +348,25 @@ html {
 }
 
 .settingSelect,
-.selectQuery {
+.selectQuery,
+.inputFieldInTicketCreate input {
+  color: var(--color-white);
   background-color: var(--color-gray-2);
   padding: 4px 8px;
   outline: none;
   cursor: pointer;
   border: 2px solid var(--color-gray-4);
 }
-.selectQuery {
+.selectQuery,
+.inputFieldInTicketCreate input {
   border-radius: 8px;
 }
-.selectQueryInput::placeholder {
+.selectQueryInput::placeholder,
+.inputFieldInTicketCreate input::placeholder {
   color: var(--color-gray-4);
 }
-.selectQueryInput {
+.selectQueryInput,
+.inputFieldInTicketCreate input {
   cursor: text;
 }
 
@@ -419,6 +443,23 @@ html {
 }
 .loginWindowButton:hover {
   color: var(--color-gray-4);
+}
+.button {
+  background-color: var(--color-green);
+  border: 2px solid var(--color-gray-5);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--color-font-gray);
+  padding: 8px 16px;
+  transition: 0.1s all ease-in-out;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: var(--color-blue);
+}
+.button:focus {
+  outline: none;
+  box-shadow: var(--color-button-focus);
 }
 
 .userContainer {
@@ -520,6 +561,9 @@ html {
     padding: 0 15%;
   }
   .overlayUserBody {
+    padding: 16px 20%;
+  }
+  .body {
     padding: 16px 20%;
   }
 }

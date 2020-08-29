@@ -19,6 +19,10 @@
     }
   });
 
+  $("#logout").on("click", function () {
+    window.location.pathname = endpoint_config.front_end_pages.logout;
+  });
+
   function updateUI(users) {
     let table = document.querySelector("#ticketTable");
     resetTable(table);
@@ -75,12 +79,11 @@
     document.getElementById("userFullName").value = this.data.name;
     document.getElementById("username").value = this.data.username;
     this.data.scopes.forEach((el) => {
-      console.log(el);
       document.getElementById(`scope${el}`).checked = true;
     });
   };
   Overlay.prototype.slideUp = function () {
-    let currentPos = -100;
+    let currentPos = -20;
     let animateInterval = setInterval(animate, 1);
 
     function animate() {
@@ -88,7 +91,7 @@
         clearInterval(animateInterval);
       } else {
         $(".ticketDetails").css({
-          bottom: `${currentPos}%`,
+          bottom: `${currentPos * 5}%`,
         });
         currentPos++;
       }
@@ -100,19 +103,18 @@
     let animateInterval = setInterval(animate, 1);
 
     function animate() {
-      if (currentPos === -101) {
+      if (currentPos === -21) {
         clearInterval(animateInterval);
       } else {
         $(".ticketDetails").css({
-          bottom: `${currentPos}%`,
+          bottom: `${currentPos * 5}%`,
         });
         currentPos--;
       }
     }
-    // refreshUI();
     setTimeout(() => {
       document.querySelector(".ticketDetails").remove();
-    }, 1000);
+    }, 200);
   };
 
   Overlay.prototype.eventListeners = function () {

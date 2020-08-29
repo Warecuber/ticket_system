@@ -47,7 +47,6 @@ router.post("/login", async (req, res) => {
 
   //check to see if the email exists
   const user = await User.findOne({ email: req.body.email });
-  console.log(user);
   if (!user) return res.status(400).send("Email or password incorrect");
   // check if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -87,7 +86,6 @@ router.post("/login", async (req, res) => {
 
 router.post("/validate", auth, (req, res) => {
   res.send({ status: 200, message: "Valid token" });
-  // console.log("authenticated");
 });
 
 router.post("/logout", auth, async (req, res) => {
@@ -109,7 +107,6 @@ router.post("/refresh", refreshAuth, async (req, res) => {
   if (!refreshToken) return res.sendStatus(401);
   // if the refresh token isn't in the list of valid token, unathorized
   const user = await User.findOne({ email: req.user.email });
-  // console.log(user);
   if (user.token !== refreshToken) return res.sendStatus(403);
   // verify the token with jwt
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {

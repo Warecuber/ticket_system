@@ -76,14 +76,13 @@
         let agent = document.createElement("option");
         agent.value = el.name;
         agent.innerHTML = el.name;
-        console.log(assigned_agent, el.name);
         if (assigned_agent === el.name) {
-          console.log("found owner");
           agent.selected = true;
         }
         where.insertAdjacentElement("beforeend", agent);
         return "complete";
       });
+      document.getElementById("assignedTo").value = assigned_agent;
     });
   }
 
@@ -132,7 +131,7 @@
     document.getElementById("assignedTo").value = this.data.agent;
   };
   Overlay.prototype.slideUp = function () {
-    let currentPos = -100;
+    let currentPos = -20;
     let animateInterval = setInterval(animate, 1);
 
     function animate() {
@@ -140,7 +139,7 @@
         clearInterval(animateInterval);
       } else {
         $(".ticketDetails").css({
-          bottom: `${currentPos}%`,
+          bottom: `${currentPos * 5}%`,
         });
         currentPos++;
       }
@@ -152,11 +151,11 @@
     let animateInterval = setInterval(animate, 1);
 
     function animate() {
-      if (currentPos === -101) {
+      if (currentPos === -21) {
         clearInterval(animateInterval);
       } else {
         $(".ticketDetails").css({
-          bottom: `${currentPos}%`,
+          bottom: `${currentPos * 5}%`,
         });
         currentPos--;
       }
@@ -164,7 +163,7 @@
     refreshUI();
     setTimeout(() => {
       document.querySelector(".ticketDetails").remove();
-    }, 1000);
+    }, 200);
   };
 
   Overlay.prototype.eventListeners = function () {
