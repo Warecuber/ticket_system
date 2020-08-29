@@ -45,7 +45,7 @@ const ticketSchema = new mongoose.Schema({
   },
   agent: {
     type: String,
-    default: "unassigned",
+    default: "Unassigned",
     required: true,
     max: 255,
     min: 6,

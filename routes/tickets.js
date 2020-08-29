@@ -29,11 +29,12 @@ router.post("/new", auth, async (req, res) => {
   if (!userPermissions.scopes.includes("create"))
     return res.status(403).send("Not authorized to create tickets");
   const ticketNumber = await Ticket.countDocuments();
-
+  let userEmail = req.body.email ? req.body.email : req.user.email;
+  let name = req.body.name ? req.body.name : req.user.name;
   const tempTicket = {
-    reporter: req.user.name,
+    reporter: name,
     subject: req.body.subject,
-    email: req.user.email,
+    email: userEmail,
     description: req.body.description,
   };
 
@@ -41,9 +42,9 @@ router.post("/new", auth, async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
   const ticket = new Ticket({
     ticket_number: ticketNumber + 1,
-    reporter: req.user.name,
+    reporter: name,
     subject: req.body.subject,
-    email: req.user.email,
+    email: userEmail,
     description: req.body.description,
   });
   try {
@@ -52,7 +53,6 @@ router.post("/new", auth, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-  res.send(ticket);
 });
 
 router.patch("/update", auth, async (req, res) => {

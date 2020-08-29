@@ -157,7 +157,7 @@
         </div>
       </div>
     </div> -->
-    <div class="ticketDetails">
+    <!-- <div class="ticketDetails">
       <div class="overlayNav">
         <p class="overlayTitle">Create New Ticket</p>
         <div class="closeButton">
@@ -165,6 +165,7 @@
         </div>
       </div>
       <div class="overlayDetails">
+        <div class="divider"></div>
         <div class="branding">John's Ticket System</div>
         <div class="divider"></div>
         <div class="ticketData">
@@ -178,11 +179,7 @@
           <div class="divider"></div>
           <div class="setting_item">
             <p class="settingLabel">Status</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-            >
+            <select name="" id="" class="settingSelect">
               <option value="Open">Open</option>
               <option value="Awaiting Response">Awaiting Response</option>
               <option value="In Progress">In Progress</option>
@@ -193,11 +190,7 @@
           <div class="divider"></div>
           <div class="setting_item">
             <p class="settingLabel">Priority</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-            >
+            <select name="" id="" class="settingSelect">
               <option value="Urgent">Urgent</option>
               <option value="High">High</option>
               <option value="Normal" selected>Normal</option>
@@ -207,11 +200,7 @@
           <div class="divider"></div>
           <div class="setting_item">
             <p class="settingLabel">Category</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-            >
+            <select name="" id="" class="settingSelect">
               <option value="Unassigned">Default</option>
               <option value="Software">Software</option>
               <option value="Hardware">Hardware</option>
@@ -221,11 +210,7 @@
           <div class="divider"></div>
           <div class="setting_item">
             <p class="settingLabel">Sub Category</p>
-            <select
-              name=""
-              id=""
-              class="settingSelect"
-            >
+            <select name="" id="" class="settingSelect">
               <option value="Unassigned">Default</option>
               <option value="Google Chrome">Google Chrome</option>
               <option value="User Error">User Error</option>
@@ -237,13 +222,48 @@
       </div>
       <div class="overlayBody">
         <div class="newTicketDetails">
-          <div class="inputFieldInTicketCreate">
-            <label for="ticketReporter">Reporter email</label>
-            <input type="email" name="ticketReporter" id="ticketReporter" placeholder="Reporter's email"/>
-          </div>
-          <div class="inputFieldInTicketCreate">
-            <label for="ticketTitle">Ticket Title</label>
-            <input type="email" name="ticketTitle" id="ticketTitle" placeholder="Reporter's email"/>
+          <div class="ticketDetailContainer">
+            <div class="userRow">
+              <label for="ticketReporter" class="userLabel"
+                >Reporter email</label
+              >
+              <div class="two-thirds-width">
+                <input
+                  type="email"
+                  name="ticketReporter"
+                  id="ticketReporter"
+                  placeholder="Reporter's email"
+                  data-required="true"
+                  class="userInput"
+                />
+              </div>
+            </div>
+            <div class="userRow">
+              <label for="reporterName" class="userLabel">Reporter Name</label>
+              <div class="two-thirds-width">
+                <input
+                  type="text"
+                  name="reporterName"
+                  id="reporterName"
+                  placeholder="Reporter's name"
+                  data-required="true"
+                  class="userInput"
+                />
+              </div>
+            </div>
+            <div class="userRow">
+              <label for="ticketTitle" class="userLabel">Ticket Title</label>
+              <div class="two-thirds-width">
+                <input
+                  type="text"
+                  name="ticketTitle"
+                  id="ticketTitle"
+                  placeholder="Reporter's email"
+                  class="userInput"
+                  data-required="true"
+                />
+              </div>
+            </div>
           </div>
           <textarea
             name="replyContent"
@@ -252,10 +272,10 @@
             placeholder="Type the ticket body"
           ></textarea>
           <div class="replyButtonContainer">
-            <button class="overlaySendButtonLower">Create</button>
+            <button class="crateNewTicketButton">Create</button>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="threadContainer">
           <div class="thread reporter">
             <div class="replyHeader">

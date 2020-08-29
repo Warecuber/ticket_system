@@ -159,8 +159,8 @@ html {
   display: block;
   position: fixed;
   height: 100%;
-  top: 0;
-  /* bottom: -100%; */
+  /* top: 0; */
+  bottom: -100%;
   width: 100%;
   left: 0;
   background-color: var(--color-blue);
@@ -308,7 +308,8 @@ html {
 .replyButtonContainer {
   margin: 4px;
 }
-.overlaySendButtonLower {
+.overlaySendButtonLower,
+.crateNewTicketButton {
   padding: 4px 8px;
   color: var(--color-white);
   border: 2px solid var(--color-gray-4);
@@ -316,11 +317,13 @@ html {
   border-radius: 5px;
   transition: 0.1s all ease-in-out;
 }
-.overlaySendButtonLower:hover {
+.overlaySendButtonLower:hover,
+.crateNewTicketButton:hover {
   cursor: pointer;
   background-color: var(--color-gray-3);
 }
-.overlaySendButtonLower:focus {
+.overlaySendButtonLower:focus,
+.crateNewTicketButton:focus {
   outline: none;
   box-shadow: var(--color-button-focus);
 }
@@ -348,8 +351,7 @@ html {
 }
 
 .settingSelect,
-.selectQuery,
-.inputFieldInTicketCreate input {
+.selectQuery {
   color: var(--color-white);
   background-color: var(--color-gray-2);
   padding: 4px 8px;
@@ -357,22 +359,23 @@ html {
   cursor: pointer;
   border: 2px solid var(--color-gray-4);
 }
-.selectQuery,
-.inputFieldInTicketCreate input {
+.selectQuery {
   border-radius: 8px;
 }
-.selectQueryInput::placeholder,
-.inputFieldInTicketCreate input::placeholder {
+.selectQueryInput::placeholder {
   color: var(--color-gray-4);
 }
-.selectQueryInput,
-.inputFieldInTicketCreate input {
+.selectQueryInput {
   cursor: text;
 }
 
 .settingSelect {
   border-radius: 4px;
   width: 100%;
+}
+
+.ticketDetailContainer {
+  width: 50%;
 }
 
 .settingSelect:active {
@@ -556,7 +559,7 @@ html {
 /* @media styles */
 /* //////////// */
 
-@media only screen and (min-width: 700px) {
+@media screen and (min-width: 1401px) {
   .overlayBody {
     padding: 0 15%;
   }
@@ -565,5 +568,35 @@ html {
   }
   .body {
     padding: 16px 20%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .overlayBody {
+    padding: 0 10%;
+  }
+  .overlayUserBody {
+    padding: 16px 20%;
+  }
+  .body {
+    padding: 16px 20%;
+  }
+  .ticketDetailContainer {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .overlayBody {
+    padding: 0 32px;
+  }
+  .overlayUserBody {
+    padding: 16px 10%;
+  }
+  .body {
+    padding: 16px 10%;
+  }
+  .ticketDetailContainer {
+    width: 100%;
   }
 }
